@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: MPL-2.0
 class_name Projectile
 extends RigidBody2D
-## A projectile that can fill matching [FillingBarrel]s.
 
 @export var label: String = "???"
 
@@ -68,14 +67,11 @@ func _set_can_hit_enemy(new_can_hit_enemy: bool) -> void:
 
 
 func _ready() -> void:
-	# --- LA BALA DE PLATA: FORZAR COLISIONES ---
-	# Esto enciende el radar de impactos del proyectil y lo conecta
-	# obligatoriamente, ignorando cualquier error del editor visual.
+	# Forzamos las colisiones por si el editor falla
 	contact_monitor = true
 	max_contacts_reported = 5
 	if not body_entered.is_connected(_on_body_entered):
 		body_entered.connect(_on_body_entered)
-	# -------------------------------------------
 
 	if trail_fx_scene:
 		_trail_particles = trail_fx_scene.instantiate()
@@ -91,12 +87,23 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	visible_things.rotation = linear_velocity.angle()
-	if node_to_follow:
-		var direction_to_target: Vector2 = global_position.direction_to(
-			node_to_follow.global_position
-		)
-		var force: Vector2 = direction_to_target * speed
-		constant_force = force
+	
+	# 1. PERSECUCIÓN DEL TARGET (Cuando es repelido)
+	if node_to_follow and is_instance_valid(node_to_follow):
+		var direction_to_target: Vector2 = global_position.direction_to(node_to_follow.global_position)
+		constant_force = direction_to_target * speed
+	else:
+		constant_force = Vector2.ZERO
+
+	# 2. DETECCIÓN POR RADAR (Bypass de físicas para asegurar el daño)
+	var player: Player = get_tree().get_first_node_in_group("player")
+	if is_instance_valid(player) and can_hit_player:
+		# Si la botella está muy cerca de Floresta, es impacto seguro
+		if global_position.distance_to(player.global_position) < 45.0:
+			print("💥 ¡Impacto por radar detectado!")
+			player.defeat()
+			explode()
+			return
 
 
 func add_small_fx() -> void:
@@ -113,21 +120,6 @@ func _on_body_entered(body: Node2D) -> void:
 	add_small_fx()
 	duration_timer.start()
 
-	# --- CÓDIGO A PRUEBA DE BALAS PARA EL IMPACTO ---
-	# 1. Chequea si chocó directamente con el cuerpo principal
-	if body.has_method("defeat"):
-		print("¡Impacto directo al Player!")
-		body.defeat()
-		explode()
-		return
-	# 2. Chequea si chocó con un Hitbox cuyo "dueño" (padre) es el Player
-	elif body.owner and body.owner.has_method("defeat"):
-		print("¡Impacto al Hitbox del Player!")
-		body.owner.defeat()
-		explode()
-		return
-	# ------------------------------------------------
-
 	if body.owner is FragileBarrel:
 		body.owner.hit_by_droplet(label)
 		queue_free()
@@ -140,19 +132,18 @@ func _on_body_entered(body: Node2D) -> void:
 			queue_free()
 
 
+# AQUÍ ESTÁ LA FUNCIÓN QUE PREGUNTABAS:
 func got_repelled(repel_direction: Vector2) -> void:
 	add_small_fx()
 	duration_timer.start()
-	
-	# --- CÓDIGO DE REBOTE HACIA EL RECICLAJE ---
-	var on_the_ground = get_tree().current_scene.get_node_or_null("OnTheGround")
-	if on_the_ground:
-		for child in on_the_ground.get_children():
-			if child.name.begins_with("Target"):
-				node_to_follow = child
-				speed = hit_speed 
-				break
-	# -------------------------------------------
+
+	# Redirección inteligente hacia los contenedores de reciclaje
+	var barrels = get_tree().get_nodes_in_group("filling_barrels")
+	for barrel in barrels:
+		if not barrel.is_locked:
+			node_to_follow = barrel
+			speed = hit_speed
+			break
 
 	var hit_vector: Vector2 = repel_direction * hit_speed
 	hit_sound.play()
