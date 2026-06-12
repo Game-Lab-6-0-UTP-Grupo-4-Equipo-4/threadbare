@@ -3,64 +3,37 @@
 class_name Projectile
 extends RigidBody2D
 ## A projectile that can fill matching [FillingBarrel]s.
-##
-## @tutorial: https://github.com/endlessm/threadbare/discussions/1323
-##
-## This is a piece of the fill-matching mechanic.
-## [br][br]
-## The projectile has a [member label] and optionally a [member color]
-## to tint it. These are assigned by the [ThrowingEnemy] when it fires a projectile.
-## When the projectile collides with a [FillingBarrel] and both labels match,
-## it calls [member FillingBarrel.increment()] and is removed.
-## [br][br]
-## The projectile will live in the scene until [member duration_timer] times up.
-## When the projectile collides with anything, this timer is resetted, so the
-## projectile life is expanded.
 
-## The projectile can fill barrels with the matching label.
 @export var label: String = "???"
 
-## Optional color. Use it together with the label to make a color-matching game.
 @export var color: Color:
 	set = _set_color
 
-## Whether this projectile hits the player.
 @export var can_hit_player: bool = true:
 	set = _set_can_hit_player
 
-## Whether this projectile hits the enemies.
 @export var can_hit_enemy: bool = false:
 	set = _set_can_hit_enemy
 
 @export_group("Movement")
 
-## The speed of the initial impulse and the bouncing impulse.
 @export_range(10., 100., 5., "or_greater", "or_less", "suffix:m/s") var speed: float = 30.0
 
-## The speed after the projectile gets hit.
 @export_range(10., 100., 5., "or_greater", "or_less", "suffix:m/s") var hit_speed: float = 100.0
 
-## The initial direction.
 @export var direction: Vector2 = Vector2(0, -1):
 	set = _set_direction
 
-## The life span of the projectile.
 @export_range(0., 10., 0.1, "or_greater", "suffix:s") var duration: float = 5.0
 
-## If set, the projectile will constantly adjust itself to target this node. It will still start
-## moving in the initial [member direction].
 @export var node_to_follow: Node2D = null
 
 @export_group("FXs")
 
-## A small visual effect used when the projectile collides with things.
 @export var small_fx_scene: PackedScene
 
-## A big visual effect used when the projectile explodes.
 @export var big_fx_scene: PackedScene
 
-## A scene with a trail particles visual effect. It should contain a [class GPUParticles2D] as
-## root node. When the projectile gets hit, the [member GPUParticles2D.amount_ratio] is set to 1.
 @export var trail_fx_scene: PackedScene
 
 var _trail_particles: GPUParticles2D
@@ -68,13 +41,7 @@ var _trail_particles: GPUParticles2D
 @onready var visible_things: Node2D = %VisibleThings
 @onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
 @onready var trail_fx_marker: Marker2D = %TrailFXMarker
-
-## How long the projectile lives in the scene.
-## [br][br]
-## This timer is restarted each time the projectile collides with anything.
-## So the life of the projectile is extended in each collision.
 @onready var duration_timer: Timer = %DurationTimer
-
 @onready var hit_sound: AudioStreamPlayer2D = %HitSound
 
 
@@ -101,6 +68,15 @@ func _set_can_hit_enemy(new_can_hit_enemy: bool) -> void:
 
 
 func _ready() -> void:
+	# --- LA BALA DE PLATA: FORZAR COLISIONES ---
+	# Esto enciende el radar de impactos del proyectil y lo conecta
+	# obligatoriamente, ignorando cualquier error del editor visual.
+	contact_monitor = true
+	max_contacts_reported = 5
+	if not body_entered.is_connected(_on_body_entered):
+		body_entered.connect(_on_body_entered)
+	# -------------------------------------------
+
 	if trail_fx_scene:
 		_trail_particles = trail_fx_scene.instantiate()
 		trail_fx_marker.add_child(_trail_particles)
@@ -123,7 +99,6 @@ func _process(_delta: float) -> void:
 		constant_force = force
 
 
-## Add a small effect scene to the current scene in the current position.
 func add_small_fx() -> void:
 	if not small_fx_scene:
 		return
@@ -138,14 +113,26 @@ func _on_body_entered(body: Node2D) -> void:
 	add_small_fx()
 	duration_timer.start()
 
-	# Logic for Fragile Barrel
-	# We must check for the specific subclass first because it inherits from FillingBarrel
+	# --- CÓDIGO A PRUEBA DE BALAS PARA EL IMPACTO ---
+	# 1. Chequea si chocó directamente con el cuerpo principal
+	if body.has_method("defeat"):
+		print("¡Impacto directo al Player!")
+		body.defeat()
+		explode()
+		return
+	# 2. Chequea si chocó con un Hitbox cuyo "dueño" (padre) es el Player
+	elif body.owner and body.owner.has_method("defeat"):
+		print("¡Impacto al Hitbox del Player!")
+		body.owner.defeat()
+		explode()
+		return
+	# ------------------------------------------------
+
 	if body.owner is FragileBarrel:
 		body.owner.hit_by_droplet(label)
 		queue_free()
 		return
 
-	# Standard Logic for FillingBarrel
 	if body.owner is FillingBarrel:
 		var filling_barrel: FillingBarrel = body.owner as FillingBarrel
 		if filling_barrel.label == label:
@@ -153,11 +140,20 @@ func _on_body_entered(body: Node2D) -> void:
 			queue_free()
 
 
-## Called from the Repel component when this body
-## enters the repel area.
 func got_repelled(repel_direction: Vector2) -> void:
 	add_small_fx()
 	duration_timer.start()
+	
+	# --- CÓDIGO DE REBOTE HACIA EL RECICLAJE ---
+	var on_the_ground = get_tree().current_scene.get_node_or_null("OnTheGround")
+	if on_the_ground:
+		for child in on_the_ground.get_children():
+			if child.name.begins_with("Target"):
+				node_to_follow = child
+				speed = hit_speed 
+				break
+	# -------------------------------------------
+
 	var hit_vector: Vector2 = repel_direction * hit_speed
 	hit_sound.play()
 	animated_sprite_2d.speed_scale = 2
@@ -181,8 +177,6 @@ func _on_duration_timer_timeout() -> void:
 	explode()
 
 
-## Remove the ball from the scene after the goal is reached.
-## Wait a short random time and then explode.
 func remove() -> void:
 	await get_tree().create_timer(randf_range(0., 3.)).timeout
 	explode()
