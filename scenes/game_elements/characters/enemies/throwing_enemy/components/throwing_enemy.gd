@@ -327,20 +327,31 @@ func _on_got_hit(body: Node2D) -> void:
 
 ## Start attacking and/or walking. The enemy will be idle until this is called.
 ## See [member autostart].
+## Start attacking and/or walking. The enemy will be idle until this is called.
+## See [member autostart].
 func start() -> void:
-	if _has_started:
-		return
+	# Eliminamos el 'if _has_started: return' si es que existía conflicto,
+	# o nos aseguramos de resetear las variables clave de ataque.
 	_has_started = true
+	_is_attacking = false
+	_is_defeated = false
+	
 	if not is_node_ready():
 		await ready
+		
 	timer.wait_time = throwing_period
-	timer.timeout.connect(_on_timeout)
-	hit_box.body_entered.connect(_on_got_hit)
+	if not timer.timeout.is_connected(_on_timeout):
+		timer.timeout.connect(_on_timeout)
+	if not hit_box.body_entered.is_connected(_on_got_hit):
+		hit_box.body_entered.connect(_on_got_hit)
+		
 	if odd_shoot:
 		await get_tree().create_timer(throwing_period / 2).timeout
+		
 	timer.start()
 	_initial_position = position
 	_set_target_position()
+	print("🎯 ¡El jefe ha despertado y el temporizador de ataque inició!")
 
 
 ## Play a remove animation and then remove the enemy from the scene.

@@ -3,37 +3,20 @@
 class_name FillGameLogic
 extends Node
 ## Manages the logic of the fill-matching game.
-##
-## @tutorial: https://github.com/endlessm/threadbare/discussions/1323
-##
-## This is a piece of the fill-matching mechanic.
-## [br][br]
-## Grabs the label and optional color of each [FillingBarrel] that exist in the
-## current scene, and assigns them as the allowed label/color of the [Projectile]
-## that each [ThrowingEnemy] is allowed to throw.
-## Each time a [FillingBarrel] is filled, perform the label/color assignment again
-## so [ThrowingEnemy]s only throw projectiles that can increase the amount of
-## the remaining barrels.
-## [br][br]
-## Also keep track of the completed [FillingBarrel]s and emit [signal goal_reached]
-## when [member barrels_to_win] is reached.
 
-## Emited when [member barrels_completed] reaches [member barrels_to_win].
 signal goal_reached
 
-## How many barrels to complete for winning.
 @export var barrels_to_win: int = 1
-
-## Whether to start the game logic automatically.
-## If false, make sure to call [method start].
 @export var autostart: bool = false
-
-## Counter for the completed barrels.
 var barrels_completed: int = 0
 
+# --- NUESTRA VARIABLE ESTÁTICA TIPO JAVA ---
+# Sobrevivirá a los reinicios de escena (reload_current_scene)
+static var batalla_iniciada: bool = false
+# ------------------------------------------
 
-## Update the allowed labels/colors and tell enemies to start.
 func start() -> void:
+	batalla_iniciada = true # Marcamos globalmente que el combate ya arrancó
 	_update_allowed_colors()
 	get_tree().call_group("throwing_enemy", "start")
 
@@ -43,7 +26,11 @@ func _ready() -> void:
 	barrels_to_win = clampi(barrels_to_win, 0, filling_barrels.size())
 	for barrel: FillingBarrel in filling_barrels:
 		barrel.completed.connect(_on_barrel_completed)
-	if autostart:
+		
+	# Lógica inteligente de auto-inicio
+	if autostart or FillGameLogic.batalla_iniciada:
+		# Pequeña pausa para asegurar que el SceneTree cargó todos los nodos
+		await get_tree().create_timer(0.5).timeout
 		start()
 
 
