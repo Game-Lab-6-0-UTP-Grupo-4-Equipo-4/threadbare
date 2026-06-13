@@ -88,22 +88,12 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	visible_things.rotation = linear_velocity.angle()
 	
-	# 1. PERSECUCIÓN DEL TARGET (Cuando es repelido)
+	# PERSECUCIÓN DEL TARGET (Cuando es repelido por el escudo)
 	if node_to_follow and is_instance_valid(node_to_follow):
 		var direction_to_target: Vector2 = global_position.direction_to(node_to_follow.global_position)
 		constant_force = direction_to_target * speed
 	else:
 		constant_force = Vector2.ZERO
-
-	# 2. DETECCIÓN POR RADAR (Bypass de físicas para asegurar el daño)
-	var player: Player = get_tree().get_first_node_in_group("player")
-	if is_instance_valid(player) and can_hit_player:
-		# Si la botella está muy cerca de Floresta, es impacto seguro
-		if global_position.distance_to(player.global_position) < 45.0:
-			print("💥 ¡Impacto por radar detectado!")
-			player.defeat()
-			explode()
-			return
 
 
 func add_small_fx() -> void:
@@ -119,6 +109,17 @@ func add_small_fx() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	add_small_fx()
 	duration_timer.start()
+
+	# --- COLISIÓN FÍSICA NATIVA CONTRA FLORESTA ---
+	if body.has_method("defeat"):
+		body.defeat()
+		explode()
+		return
+	elif body.owner and body.owner.has_method("defeat"):
+		body.owner.defeat()
+		explode()
+		return
+	# ----------------------------------------------
 
 	if body.owner is FragileBarrel:
 		body.owner.hit_by_droplet(label)
@@ -171,3 +172,11 @@ func _on_duration_timer_timeout() -> void:
 func remove() -> void:
 	await get_tree().create_timer(randf_range(0., 3.)).timeout
 	explode()
+
+
+func _on_damage_area_area_entered(area: Area2D) -> void:
+	# Como el área es parte de Floresta, buscamos al "dueño" del área
+	if area.owner and area.owner.has_method("defeat"):
+		print("¡Impacto físico nativo contra Floresta!")
+		area.owner.defeat()
+		explode()

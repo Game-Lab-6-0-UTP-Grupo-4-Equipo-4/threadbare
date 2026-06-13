@@ -447,7 +447,7 @@ script = ExtResource("2_8jhju")
 [node name="HitBox" type="Area2D" parent="PlayerHarm" unique_id=1910507610]
 unique_name_in_owner = true
 collision_layer = 64
-collision_mask = 256
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHarm/HitBox" unique_id=1807630823]
 position = Vector2(0, -28.5)
