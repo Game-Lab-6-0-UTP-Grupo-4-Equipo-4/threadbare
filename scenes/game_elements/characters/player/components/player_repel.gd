@@ -14,12 +14,31 @@ const REPEL_ANTICIPATION_TIME: float = 0.3
 ## If controlled by the player, which input action triggers the repel.
 @export var input_action: StringName = &"repel"
 
+# --- NUEVAS VARIABLES DE BALANCEO (COOLDOWN) ---
+@export var max_duration: float = 0.8  # Tiempo máximo que puede mantenerse activo
+@export var cooldown: float = 1.5      # Tiempo de espera antes de volver a usarlo
+# -----------------------------------------------
+
 ## Current state of the repel.
 @export var repelling: bool = false:
 	set = _set_repelling
 
+# --- VARIABLES INTERNAS PARA CONTROLAR TIEMPOS ---
+var _is_on_cooldown: bool = false
+var _active_time: float = 0.0
+# -------------------------------------------------
+
 @onready var air_stream: Area2D = %AirStream
 @onready var repel_animation: AnimationPlayer = %RepelAnimation
+
+
+# Controlamos el tiempo máximo que el escudo lleva activo
+func _process(delta: float) -> void:
+	if repelling:
+		_active_time += delta
+		# Si se excede el tiempo límite, forzamos el apagado y la recarga
+		if _active_time >= max_duration:
+			_trigger_cooldown()
 
 
 func _set_repelling(new_repelling: bool) -> void:
@@ -34,15 +53,34 @@ func _set_repelling(new_repelling: bool) -> void:
 func _unhandled_input(_event: InputEvent) -> void:
 	if not player_controlled:
 		return
+		
 	if Input.is_action_just_pressed(input_action):
-		repelling = true
+		# Solo permitimos activar el escudo si NO está en tiempo de recarga
+		if not _is_on_cooldown:
+			_active_time = 0.0 # Reiniciamos el cronómetro de uso
+			repelling = true
 	elif Input.is_action_just_released(input_action):
-		repelling = false
+		# Si el jugador suelta el botón antes del límite, inicia la recarga
+		if repelling:
+			_trigger_cooldown()
+
+
+# Función encargada de apagar el escudo y castigar al jugador con tiempo de espera
+func _trigger_cooldown() -> void:
+	repelling = false
+	_is_on_cooldown = true
+	print("⏳ Escudo apagado. Esperando recarga...")
+	
+	await get_tree().create_timer(cooldown).timeout
+	
+	_is_on_cooldown = false
+	print("✅ ¡Escudo listo para usarse de nuevo!")
 
 
 func repel_once() -> void:
-	repelling = true
-	repelling = false
+	if not _is_on_cooldown:
+		repelling = true
+		repelling = false
 
 
 func _on_air_stream_body_entered(body: Node2D) -> void:
