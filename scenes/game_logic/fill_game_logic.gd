@@ -2,21 +2,17 @@
 # SPDX-License-Identifier: MPL-2.0
 class_name FillGameLogic
 extends Node
-## Manages the logic of the fill-matching game.
 
 signal goal_reached
 
-@export var barrels_to_win: int = 1
+@export var barrels_to_win: int = 5 # Ajustado a 5 para las 3 fases
 @export var autostart: bool = false
 var barrels_completed: int = 0
 
-# --- NUESTRA VARIABLE ESTÁTICA TIPO JAVA ---
-# Sobrevivirá a los reinicios de escena (reload_current_scene)
 static var batalla_iniciada: bool = false
-# ------------------------------------------
 
 func start() -> void:
-	batalla_iniciada = true # Marcamos globalmente que el combate ya arrancó
+	batalla_iniciada = true
 	_update_allowed_colors()
 	get_tree().call_group("throwing_enemy", "start")
 
@@ -27,9 +23,7 @@ func _ready() -> void:
 	for barrel: FillingBarrel in filling_barrels:
 		barrel.completed.connect(_on_barrel_completed)
 		
-	# Lógica inteligente de auto-inicio
 	if autostart or FillGameLogic.batalla_iniciada:
-		# Pequeña pausa para asegurar que el SceneTree cargó todos los nodos
 		await get_tree().create_timer(0.5).timeout
 		start()
 
@@ -53,6 +47,10 @@ func _update_allowed_colors() -> void:
 func _on_barrel_completed() -> void:
 	barrels_completed += 1
 	_update_allowed_colors()
+	
+	# ---> EL AVISO PARA CAMBIAR DE FASE <---
+	get_tree().call_group("throwing_enemy", "change_phase", barrels_completed)
+	
 	if barrels_completed < barrels_to_win:
 		return
 	get_tree().call_group("throwing_enemy", "remove")
