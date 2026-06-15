@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boxb4vct4ff7s"
-path="res://.godot/imported/Floresta_blue_idle.png-dd0ac413264eed3bd7a8926ac44ae542.ctex"
+uid="uid://d0cvf6qpl8p6r"
+path="res://.godot/imported/Floresta_player_defeated.png-7b5be8e02c49698ec9d1475fcf601d21.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/quests/story_quests/nature_max/player_components/Floresta_blue_idle.png"
-dest_files=["res://.godot/imported/Floresta_blue_idle.png-dd0ac413264eed3bd7a8926ac44ae542.ctex"]
+source_file="res://scenes/quests/story_quests/nature_max/mis_mosaicos/Floresta_player_defeated.png"
+dest_files=["res://.godot/imported/Floresta_player_defeated.png-7b5be8e02c49698ec9d1475fcf601d21.ctex"]
 
 [params]
 
@@ -23,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
