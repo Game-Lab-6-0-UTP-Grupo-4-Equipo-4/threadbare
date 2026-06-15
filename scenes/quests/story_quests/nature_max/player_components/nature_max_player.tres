@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c0itxt8w3yml0" path="res://assets/first_party/templates/player/NO_EDIT_player_attack_01.png" id="1_trdgi"]
 [ext_resource type="Texture2D" uid="uid://covbt3em3ppm1" path="res://assets/first_party/templates/player/NO_EDIT_player_attack_02.png" id="2_otdwd"]
-[ext_resource type="Texture2D" uid="uid://dly3ikrx05f0x" path="res://assets/first_party/templates/player/NO_EDIT_player_defeated.png" id="3_065kk"]
+[ext_resource type="Texture2D" uid="uid://cd6ntwsicspp5" path="res://scenes/quests/story_quests/nature_max/player_components/Floresta_player_defeated.png" id="3_trdgi"]
 [ext_resource type="Texture2D" uid="uid://boxb4vct4ff7s" path="res://scenes/quests/story_quests/nature_max/player_components/Floresta_blue_idle.png" id="5_065kk"]
 [ext_resource type="Texture2D" uid="uid://k1sfuehbntw8" path="res://scenes/quests/story_quests/nature_max/player_components/Floresta_blue_walk.png" id="7_gs453"]
 
@@ -38,13 +38,49 @@ region = Rect2(384, 0, 192, 192)
 atlas = ExtResource("2_otdwd")
 region = Rect2(576, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cu6lk"]
-atlas = ExtResource("3_065kk")
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3klo"]
+atlas = ExtResource("3_trdgi")
 region = Rect2(0, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_icahe"]
-atlas = ExtResource("3_065kk")
+[sub_resource type="AtlasTexture" id="AtlasTexture_5yqsx"]
+atlas = ExtResource("3_trdgi")
 region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6t8xh"]
+atlas = ExtResource("3_trdgi")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6resd"]
+atlas = ExtResource("3_trdgi")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdwp7"]
+atlas = ExtResource("3_trdgi")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ck7g0"]
+atlas = ExtResource("3_trdgi")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gp7vy"]
+atlas = ExtResource("3_trdgi")
+region = Rect2(1152, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apsbh"]
+atlas = ExtResource("3_trdgi")
+region = Rect2(1344, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pw85y"]
+atlas = ExtResource("3_trdgi")
+region = Rect2(1536, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uidcp"]
+atlas = ExtResource("3_trdgi")
+region = Rect2(1728, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnnqr"]
+atlas = ExtResource("3_trdgi")
+region = Rect2(1920, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_trdgi"]
 atlas = ExtResource("5_065kk")
@@ -148,37 +184,37 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cu6lk")
+"texture": SubResource("AtlasTexture_y3klo")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_icahe")
+"texture": SubResource("AtlasTexture_5yqsx")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cu6lk")
+"texture": SubResource("AtlasTexture_6t8xh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_icahe")
+"texture": SubResource("AtlasTexture_6resd")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cu6lk")
+"texture": SubResource("AtlasTexture_jdwp7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_icahe")
+"texture": SubResource("AtlasTexture_ck7g0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cu6lk")
+"texture": SubResource("AtlasTexture_gp7vy")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_icahe")
+"texture": SubResource("AtlasTexture_apsbh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cu6lk")
+"texture": SubResource("AtlasTexture_pw85y")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_icahe")
+"texture": SubResource("AtlasTexture_uidcp")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cu6lk")
+"texture": SubResource("AtlasTexture_jnnqr")
 }],
 "loop": true,
 "name": &"defeated",

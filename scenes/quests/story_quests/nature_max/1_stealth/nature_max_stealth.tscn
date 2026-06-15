@@ -11,7 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://dua6mynlw2ptw" path="res://scenes/game_elements/props/checkpoint/checkpoint.tscn" id="9_g3lrk"]
 [ext_resource type="Resource" uid="uid://b2m3f8duuajqh" path="res://scenes/quests/story_quests/nature_max/1_stealth/stealth_components/nature_max_checkpoint.dialogue" id="10_4re5v"]
 [ext_resource type="PackedScene" uid="uid://cfcgrfvtn04yp" path="res://scenes/ui_elements/hud/hud.tscn" id="11_p0cwl"]
+[ext_resource type="PackedScene" uid="uid://bi6kyun7o3k3o" path="res://scenes/quests/story_quests/el_juguete_perdido/objects_components/tree_moving.tscn" id="11_t3gbo"]
+[ext_resource type="PackedScene" uid="uid://dxet7sajks8lr" path="res://scenes/quests/story_quests/el_juguete_perdido/0_intro/components/trees2.tscn" id="12_118w1"]
 [ext_resource type="PackedScene" uid="uid://fuhl3l6gxq5k" path="res://scenes/game_elements/props/collectible_item/collectible_item.tscn" id="12_o8clb"]
+[ext_resource type="PackedScene" uid="uid://d0c6ti0aqpt5o" path="res://scenes/quests/story_quests/el_juguete_perdido/objects_components/tree_idle.tscn" id="13_118w1"]
 [ext_resource type="Script" uid="uid://bgmwplmj3bfls" path="res://scenes/globals/game_state/inventory/inventory_item.gd" id="13_xpn67"]
 [ext_resource type="Resource" uid="uid://cxkgl7sqa5k6u" path="res://scenes/quests/story_quests/nature_max/1_stealth/stealth_components/nature_max_collected.dialogue" id="14_8rw83"]
 [ext_resource type="Script" uid="uid://x1mxt6bmei2o" path="res://scenes/ui_elements/cinematic/cinematic.gd" id="15_wmnjg"]
@@ -113,6 +116,136 @@ dialogue = ExtResource("10_4re5v")
 position = Vector2(1, -2)
 shape = SubResource("RectangleShape2D_mu511")
 debug_color = Color(0, 0, 0, 0.42)
+
+[node name="Tree" parent="Checkpoints" unique_id=621349236 instance=ExtResource("11_t3gbo")]
+position = Vector2(85, 327)
+scale = Vector2(1.1289023, 1.1164885)
+
+[node name="Tree2" parent="Checkpoints" unique_id=460641319 instance=ExtResource("11_t3gbo")]
+position = Vector2(166, 313)
+scale = Vector2(0.9316113, 0.92306226)
+
+[node name="Tree3" parent="Checkpoints" unique_id=82932597 instance=ExtResource("11_t3gbo")]
+position = Vector2(239, 307)
+scale = Vector2(1.0042433, 0.95743465)
+
+[node name="Tree4" parent="Checkpoints" unique_id=522276437 instance=ExtResource("11_t3gbo")]
+position = Vector2(321, 306)
+scale = Vector2(1.2180569, 1.1371658)
+
+[node name="Equipo2Trees1" parent="Checkpoints" unique_id=699150572 instance=ExtResource("12_118w1")]
+position = Vector2(556, 614)
+
+[node name="Equipo2Trees5" parent="Checkpoints" unique_id=1121341125 instance=ExtResource("12_118w1")]
+position = Vector2(-148, 667)
+
+[node name="Equipo2Trees6" parent="Checkpoints" unique_id=557275474 instance=ExtResource("12_118w1")]
+position = Vector2(-148, 667)
+
+[node name="Equipo2Trees2" parent="Checkpoints" unique_id=2021383451 instance=ExtResource("12_118w1")]
+position = Vector2(894, 174)
+
+[node name="Tree5" parent="Checkpoints" unique_id=1476402595 instance=ExtResource("11_t3gbo")]
+position = Vector2(374, 366)
+scale = Vector2(0.8405009, 0.86562765)
+
+[node name="Tree6" parent="Checkpoints" unique_id=420203856 instance=ExtResource("11_t3gbo")]
+position = Vector2(451.00003, 361)
+scale = Vector2(0.8405009, 0.86562765)
+
+[node name="Tree7" parent="Checkpoints" unique_id=287562947 instance=ExtResource("11_t3gbo")]
+position = Vector2(530, 371)
+scale = Vector2(0.8405009, 0.86562765)
+
+[node name="Tree8" parent="Checkpoints" unique_id=110260459 instance=ExtResource("11_t3gbo")]
+position = Vector2(598, 374)
+scale = Vector2(0.8405009, 0.86562765)
+
+[node name="Tree19" parent="Checkpoints" unique_id=1254648867 instance=ExtResource("11_t3gbo")]
+position = Vector2(25, 390)
+scale = Vector2(0.8405009, 0.86562765)
+
+[node name="Tree20" parent="Checkpoints" unique_id=2120176927 instance=ExtResource("11_t3gbo")]
+position = Vector2(25, 496)
+scale = Vector2(0.8405009, 0.86562765)
+
+[node name="Tree21" parent="Checkpoints" unique_id=1408484158 instance=ExtResource("11_t3gbo")]
+position = Vector2(429, 263)
+scale = Vector2(0.8405009, 0.86562765)
+
+[node name="Tree22" parent="Checkpoints" unique_id=2095362951 instance=ExtResource("11_t3gbo")]
+position = Vector2(540, 264)
+scale = Vector2(0.8405009, 0.86562765)
+
+[node name="Tree23" parent="Checkpoints" unique_id=203025109 instance=ExtResource("11_t3gbo")]
+position = Vector2(889, 368)
+scale = Vector2(0.8405009, 0.86562765)
+
+[node name="Tree24" parent="Checkpoints" unique_id=1428344742 instance=ExtResource("11_t3gbo")]
+position = Vector2(802, 313)
+scale = Vector2(0.8405009, 0.86562765)
+
+[node name="Tree25" parent="Checkpoints" unique_id=243892664 instance=ExtResource("11_t3gbo")]
+position = Vector2(686, 292)
+scale = Vector2(0.8405009, 0.86562765)
+
+[node name="Tree9" parent="Checkpoints" unique_id=1084668240 instance=ExtResource("11_t3gbo")]
+position = Vector2(684, 380)
+scale = Vector2(0.8405009, 0.86562765)
+
+[node name="Tree10" parent="Checkpoints" unique_id=824605709 instance=ExtResource("11_t3gbo")]
+position = Vector2(2018, 294)
+scale = Vector2(0.8430614, 0.91236395)
+
+[node name="Equipo2Trees3" parent="Checkpoints" unique_id=397388457 instance=ExtResource("12_118w1")]
+position = Vector2(1832, 152)
+
+[node name="Tree11" parent="Checkpoints" unique_id=244603863 instance=ExtResource("11_t3gbo")]
+position = Vector2(1396, 605)
+scale = Vector2(0.9443955, 1.0398542)
+
+[node name="Equipo2Trees4" parent="Checkpoints" unique_id=2024122284 instance=ExtResource("12_118w1")]
+position = Vector2(1310, 625)
+
+[node name="Equipo2Trees7" parent="Checkpoints" unique_id=590324397 instance=ExtResource("12_118w1")]
+position = Vector2(1453, 768)
+
+[node name="Equipo2Trees8" parent="Checkpoints" unique_id=1874258597 instance=ExtResource("12_118w1")]
+position = Vector2(1459, 993)
+
+[node name="Equipo2Trees10" parent="Checkpoints" unique_id=259230090 instance=ExtResource("12_118w1")]
+position = Vector2(1858, 1164)
+
+[node name="Equipo2Trees9" parent="Checkpoints" unique_id=1800182407 instance=ExtResource("12_118w1")]
+position = Vector2(3143, 423)
+
+[node name="Tree12" parent="Checkpoints" unique_id=1292869522 instance=ExtResource("13_118w1")]
+position = Vector2(2542, 502)
+scale = Vector2(0.8011689, 0.8311268)
+
+[node name="Tree13" parent="Checkpoints" unique_id=1682377995 instance=ExtResource("13_118w1")]
+position = Vector2(2528, 616)
+scale = Vector2(0.8011689, 0.8311268)
+
+[node name="Tree14" parent="Checkpoints" unique_id=481589431 instance=ExtResource("13_118w1")]
+position = Vector2(2478, 746)
+scale = Vector2(0.8011689, 0.8311268)
+
+[node name="Tree15" parent="Checkpoints" unique_id=831574497 instance=ExtResource("13_118w1")]
+position = Vector2(2467, 851.99994)
+scale = Vector2(0.8011689, 0.8311268)
+
+[node name="Tree17" parent="Checkpoints" unique_id=1400709848 instance=ExtResource("13_118w1")]
+position = Vector2(2467, 851.99994)
+scale = Vector2(0.8011689, 0.8311268)
+
+[node name="Tree16" parent="Checkpoints" unique_id=912908115 instance=ExtResource("13_118w1")]
+position = Vector2(2463, 1088)
+scale = Vector2(0.8011689, 0.8311268)
+
+[node name="Tree18" parent="Checkpoints" unique_id=1949212442 instance=ExtResource("13_118w1")]
+position = Vector2(2466, 952)
+scale = Vector2(0.8011689, 0.8311268)
 
 [node name="ScreenOverlay" type="CanvasLayer" parent="." unique_id=495226624]
 
