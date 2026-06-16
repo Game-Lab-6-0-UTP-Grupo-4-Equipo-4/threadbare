@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://d0c6ti0aqpt5o" path="res://scenes/quests/story_quests/el_juguete_perdido/objects_components/tree_idle.tscn" id="9_y14wn"]
 [ext_resource type="PackedScene" uid="uid://dxet7sajks8lr" path="res://scenes/quests/story_quests/el_juguete_perdido/0_intro/components/trees2.tscn" id="10_e2try"]
 [ext_resource type="PackedScene" uid="uid://bp20cjimwi8l0" path="res://scenes/game_elements/props/buildings/house/house_2.tscn" id="11_cfeoo"]
+[ext_resource type="PackedScene" uid="uid://dv4f232y8w8dv" path="res://scenes/game_elements/props/decoration/water_rock/water_rock.tscn" id="12_y14wn"]
 
 [sub_resource type="Animation" id="Animation_y14wn"]
 length = 0.001
@@ -244,3 +245,6 @@ position = Vector2(688, 253)
 
 [node name="House_4" parent="." unique_id=1876566017 instance=ExtResource("11_cfeoo")]
 position = Vector2(574, 377)
+
+[node name="WaterRock" parent="." unique_id=200189883 instance=ExtResource("12_y14wn")]
+position = Vector2(365, 401)
