@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boxb4vct4ff7s"
-path="res://.godot/imported/Floresta_blue_idle.png-dd0ac413264eed3bd7a8926ac44ae542.ctex"
+uid="uid://dbr0lcjb6yq8n"
+path="res://.godot/imported/naturemax_monstruo_attackanticipation.png-ec60b84e94835dac6d3d587ee57a8b05.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/quests/story_quests/nature_max/player_components/Floresta_blue_idle.png"
-dest_files=["res://.godot/imported/Floresta_blue_idle.png-dd0ac413264eed3bd7a8926ac44ae542.ctex"]
+source_file="res://scenes/quests/story_quests/nature_max/mis_mosaicos/naturemax_monstruo_animacion/naturemax_monstruo_attackanticipation.png"
+dest_files=["res://.godot/imported/naturemax_monstruo_attackanticipation.png-ec60b84e94835dac6d3d587ee57a8b05.ctex"]
 
 [params]
 
@@ -23,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
