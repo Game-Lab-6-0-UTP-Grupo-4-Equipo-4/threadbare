@@ -70,6 +70,7 @@ var projectile_speed: float = 90.0
 var allowed_labels: Array[String] = ["???"]
 var color_per_label: Dictionary[String, Color]
 
+var _player: Node2D
 var _initial_position: Vector2
 var _target_position: Vector2
 var _is_attacking: bool
@@ -114,10 +115,10 @@ func _ready() -> void:
 	_set_sprite_frames(sprite_frames)
 	if Engine.is_editor_hint():
 		return
-	var player: Player = get_tree().get_first_node_in_group("player")
-	if is_instance_valid(player):
+	_player = get_tree().get_first_node_in_group("player") as Node2D
+	if is_instance_valid(_player):
 		var direction: Vector2 = projectile_marker.global_position.direction_to(
-			player.global_position
+			_player.global_position
 		)
 		scale.x = 1 if direction.x < 0 else -1
 	if autostart:
@@ -202,8 +203,7 @@ func _set_target_position() -> void:
 
 
 func _on_timeout() -> void:
-	var player: Player = get_tree().get_first_node_in_group("player")
-	if not is_instance_valid(player):
+	if not is_instance_valid(_player):
 		return
 	_is_attacking = true
 	animation_player.play(&"attack")
