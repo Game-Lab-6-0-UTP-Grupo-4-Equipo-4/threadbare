@@ -77,36 +77,42 @@ walking_speed = 75.0
 [node name="Target" parent="OnTheGround" unique_id=1718603548 instance=ExtResource("13_f7610")]
 position = Vector2(502, 164)
 sprite_frames = ExtResource("14_xw4qf")
+needed_amount = 5
 label = ""
 color = Color(1, 1, 1, 1)
 
 [node name="Target2" parent="OnTheGround" unique_id=711725062 instance=ExtResource("13_f7610")]
 position = Vector2(758, 164)
 sprite_frames = ExtResource("14_xw4qf")
+needed_amount = 5
 label = ""
 color = Color(1, 1, 1, 1)
 
 [node name="Target3" parent="OnTheGround" unique_id=1832726000 instance=ExtResource("13_f7610")]
 position = Vector2(761, 497)
 sprite_frames = ExtResource("14_xw4qf")
+needed_amount = 5
 label = ""
 color = Color(1, 1, 1, 1)
 
 [node name="Target4" parent="OnTheGround" unique_id=857122250 instance=ExtResource("13_f7610")]
 position = Vector2(632, 497)
 sprite_frames = ExtResource("14_xw4qf")
+needed_amount = 5
 label = ""
 color = Color(1, 1, 1, 1)
 
 [node name="Target5" parent="OnTheGround" unique_id=1348280126 instance=ExtResource("13_f7610")]
 position = Vector2(633, 164)
 sprite_frames = ExtResource("14_xw4qf")
+needed_amount = 5
 label = ""
 color = Color(1, 1, 1, 1)
 
 [node name="Target6" parent="OnTheGround" unique_id=1005497940 instance=ExtResource("13_f7610")]
 position = Vector2(501, 497)
 sprite_frames = ExtResource("14_xw4qf")
+needed_amount = 5
 label = ""
 color = Color(1, 1, 1, 1)
 

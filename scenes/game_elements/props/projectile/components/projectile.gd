@@ -80,11 +80,9 @@ func _ready() -> void:
 
 	_set_color(color)
 	
-	# Aplicar el visual tóxico al nacer
 	if is_contaminated:
 		animated_sprite_2d.modulate = Color(0.4, 0.9, 0.4, 0.8)
 
-	# Asignar a la capa 11 (Contaminado) por defecto
 	set_collision_layer_value(11, true)
 	set_collision_layer_value(12, false)
 
@@ -135,7 +133,6 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 
 	if body.owner is FillingBarrel:
-		# Los contenedores destruyen las botellas sucias. Solo aceptan las purificadas.
 		if is_contaminated:
 			explode()
 			return
@@ -143,6 +140,10 @@ func _on_body_entered(body: Node2D) -> void:
 		var filling_barrel: FillingBarrel = body.owner as FillingBarrel
 		if filling_barrel.label == label:
 			filling_barrel.increment()
+			
+			# --- AVISO AL JEFE DE BOTELLA RECICLADA ---
+			get_tree().call_group("throwing_enemy", "bottle_recycled")
+			
 			queue_free()
 
 
@@ -176,11 +177,9 @@ func purify_projectile() -> void:
 	var tween = create_tween()
 	tween.tween_property(animated_sprite_2d, "modulate", Color.WHITE, 0.2)
 	
-	# Transición de capa física: De Contaminado (11) a Purificado (12)
 	set_collision_layer_value(11, false)
 	set_collision_layer_value(12, true)
 	
-	# Aseguramos la interacción con los contenedores de reciclaje (Capa 14)
 	set_collision_mask_value(14, true)
 
 

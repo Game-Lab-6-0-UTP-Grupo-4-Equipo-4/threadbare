@@ -46,7 +46,7 @@ const WALK_TARGET_SKIP_RANGE: float = 0.25
 		update_configuration_warnings()
 
 @export_range(10., 200., 5., "or_greater", "or_less", "suffix:m/s")
-var projectile_speed: float = 110.0 # Comenzamos en 110 como acordamos
+var projectile_speed: float = 110.0
 
 @export_range(0., 10., 0.1, "or_greater", "suffix:s") var projectile_duration: float = 5.0
 @export var projectile_follows_player: bool = false
@@ -74,6 +74,7 @@ var _is_defeated: bool
 var _has_started: bool = false
 
 var current_phase: int = 1
+var total_bottles_recycled: int = 0
 
 @onready var timer: Timer = %Timer
 @onready var projectile_marker: Marker2D = %ProjectileMarker
@@ -305,13 +306,13 @@ func remove() -> void:
 	queue_free()
 
 
-# --- CEREBRO DE FASES Y ANIMACIÓN VISUAL ---
-func change_phase(barrels_completed: int) -> void:
-	if barrels_completed == 2:
-		# Detenemos todo y esperamos la animación
+func bottle_recycled() -> void:
+	total_bottles_recycled += 1
+	print("🍾 ¡Botella reciclada! Total acertadas: ", total_bottles_recycled)
+	
+	if total_bottles_recycled == 9 and current_phase == 1:
 		await _play_enrage_animation("FASE 2")
 		
-		# Aplicamos las nuevas estadísticas
 		current_phase = 2
 		throwing_period = 1.2
 		walking_speed = 100.0
@@ -319,11 +320,9 @@ func change_phase(barrels_completed: int) -> void:
 		timer.wait_time = throwing_period
 		print("😡 FASE 2: ¡Disparo Doble y proyectiles a 140 m/s!")
 		
-	elif barrels_completed == 4:
-		# Detenemos todo y esperamos la animación
+	elif total_bottles_recycled == 21 and current_phase == 2:
 		await _play_enrage_animation("FASE 3")
 		
-		# Aplicamos las nuevas estadísticas
 		current_phase = 3
 		throwing_period = 0.6
 		walking_speed = 150.0
@@ -335,26 +334,20 @@ func change_phase(barrels_completed: int) -> void:
 func _play_enrage_animation(phase_name: String) -> void:
 	print("⚠️ EL MONSTRUO ESTÁ EVOLUCIONANDO A " + phase_name + "...")
 	
-	# Pausamos a la IA para que deje de caminar y disparar
 	_is_attacking = true 
 	timer.stop()
 	
 	var tween = create_tween()
-	# El monstruo se tiñe de rojo intenso y crece un 20%
 	tween.tween_property(animated_sprite_2d, "modulate", Color(2.0, 0.2, 0.2, 1.0), 0.4)
 	tween.parallel().tween_property(animated_sprite_2d, "scale", Vector2(1.2, 1.2), 0.4)
 	
-	# Regresa a la normalidad
 	tween.tween_property(animated_sprite_2d, "modulate", Color.WHITE, 0.4)
 	tween.parallel().tween_property(animated_sprite_2d, "scale", Vector2(1.0, 1.0), 0.4)
 	
-	# Le damos 1 segundo de "descanso" dramático al jugador
 	await get_tree().create_timer(1.0).timeout 
 	
-	# Despertamos a la bestia con sus nuevos stats
 	_is_attacking = false
 	timer.start()
-# -------------------------------------------
 
 
 func _set_idle_sound_stream(new_value: AudioStream) -> void:
