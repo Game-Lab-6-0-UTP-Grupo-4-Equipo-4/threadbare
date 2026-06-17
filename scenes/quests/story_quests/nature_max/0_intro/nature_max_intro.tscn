@@ -235,7 +235,7 @@ position = Vector2(1077.9999, 501.99997)
 scale = Vector2(1.0985442, 1.1216481)
 
 [node name="Equipo2Trees1" parent="." unique_id=699150572 instance=ExtResource("10_e2try")]
-position = Vector2(-330, 142)
+position = Vector2(-364, 86)
 
 [node name="House_2" parent="." unique_id=913868571 instance=ExtResource("11_cfeoo")]
 position = Vector2(509, 276)
