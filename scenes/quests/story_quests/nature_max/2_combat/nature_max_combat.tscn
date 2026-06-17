@@ -70,7 +70,6 @@ sprite_frames = ExtResource("9_eiisa")
 position = Vector2(640, 338)
 sprite_frames = ExtResource("11_xw4qf")
 projectile_scene = ExtResource("12_5qxpd")
-projectile_speed = 110.0
 walking_time = 2.0
 walking_range = 150.0
 walking_speed = 75.0

@@ -45,11 +45,8 @@ const WALK_TARGET_SKIP_RANGE: float = 0.25
 		projectile_scene_for_label = new_value
 		update_configuration_warnings()
 
-# --- VELOCIDAD EXTREMA DESDE LA FASE 1 ---
-# Aumentamos el límite del slider a 200 y el valor por defecto a 90 (antes 30)
 @export_range(10., 200., 5., "or_greater", "or_less", "suffix:m/s")
-var projectile_speed: float = 90.0 
-# -----------------------------------------
+var projectile_speed: float = 110.0 # Comenzamos en 110 como acordamos
 
 @export_range(0., 10., 0.1, "or_greater", "suffix:s") var projectile_duration: float = 5.0
 @export var projectile_follows_player: bool = false
@@ -308,21 +305,56 @@ func remove() -> void:
 	queue_free()
 
 
+# --- CEREBRO DE FASES Y ANIMACIÓN VISUAL ---
 func change_phase(barrels_completed: int) -> void:
 	if barrels_completed == 2:
+		# Detenemos todo y esperamos la animación
+		await _play_enrage_animation("FASE 2")
+		
+		# Aplicamos las nuevas estadísticas
 		current_phase = 2
 		throwing_period = 1.2
 		walking_speed = 100.0
-		projectile_speed = 140.0 # Más rápido en fase 2
+		projectile_speed = 140.0
 		timer.wait_time = throwing_period
 		print("😡 FASE 2: ¡Disparo Doble y proyectiles a 140 m/s!")
+		
 	elif barrels_completed == 4:
+		# Detenemos todo y esperamos la animación
+		await _play_enrage_animation("FASE 3")
+		
+		# Aplicamos las nuevas estadísticas
 		current_phase = 3
 		throwing_period = 0.6
 		walking_speed = 150.0
-		projectile_speed = 170.0 # Ultra rápido en fase 3
+		projectile_speed = 170.0
 		timer.wait_time = throwing_period
 		print("🤬 FASE 3: ¡MODO CUPHEAD! Disparo triple a 170 m/s.")
+
+
+func _play_enrage_animation(phase_name: String) -> void:
+	print("⚠️ EL MONSTRUO ESTÁ EVOLUCIONANDO A " + phase_name + "...")
+	
+	# Pausamos a la IA para que deje de caminar y disparar
+	_is_attacking = true 
+	timer.stop()
+	
+	var tween = create_tween()
+	# El monstruo se tiñe de rojo intenso y crece un 20%
+	tween.tween_property(animated_sprite_2d, "modulate", Color(2.0, 0.2, 0.2, 1.0), 0.4)
+	tween.parallel().tween_property(animated_sprite_2d, "scale", Vector2(1.2, 1.2), 0.4)
+	
+	# Regresa a la normalidad
+	tween.tween_property(animated_sprite_2d, "modulate", Color.WHITE, 0.4)
+	tween.parallel().tween_property(animated_sprite_2d, "scale", Vector2(1.0, 1.0), 0.4)
+	
+	# Le damos 1 segundo de "descanso" dramático al jugador
+	await get_tree().create_timer(1.0).timeout 
+	
+	# Despertamos a la bestia con sus nuevos stats
+	_is_attacking = false
+	timer.start()
+# -------------------------------------------
 
 
 func _set_idle_sound_stream(new_value: AudioStream) -> void:
