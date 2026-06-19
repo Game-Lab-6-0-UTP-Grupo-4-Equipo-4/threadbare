@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://xja0j00pfrxc" path="res://assets/third_party/tiny-swords-non-cc0/Buildings/Blue Buildings/House1.png" id="12_e2try"]
 [ext_resource type="PackedScene" uid="uid://dv4f232y8w8dv" path="res://scenes/game_elements/props/decoration/water_rock/water_rock.tscn" id="12_y14wn"]
 [ext_resource type="PackedScene" uid="uid://dttyvh6kyru5y" path="res://scenes/game_elements/props/decoration/butterfly/butterfly.tscn" id="13_x4ueq"]
+[ext_resource type="PackedScene" uid="uid://djmdhrse34vgq" path="res://scenes/game_elements/props/decoration/bunny/bunny.tscn" id="15_x4ueq"]
 
 [sub_resource type="Animation" id="Animation_y14wn"]
 length = 0.001
@@ -349,3 +350,6 @@ position = Vector2(1050, 370)
 [node name="Butterfly5" parent="." unique_id=1106318121 instance=ExtResource("13_x4ueq")]
 modulate = Color(1, 0.47870272, 0.47509748, 1)
 position = Vector2(183, 297)
+
+[node name="Bunny" parent="." unique_id=398073521 instance=ExtResource("15_x4ueq")]
+position = Vector2(296, 427)
