@@ -30,12 +30,14 @@ extends RigidBody2D
 @export_group("FXs")
 
 @export var small_fx_scene: PackedScene
-
 @export var big_fx_scene: PackedScene
-
 @export var trail_fx_scene: PackedScene
 
 var _trail_particles: GPUParticles2D
+
+# --- ESTADO DE PURIFICACIÓN ---
+var is_contaminated: bool = true
+# ------------------------------
 
 @onready var visible_things: Node2D = %VisibleThings
 @onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
@@ -67,7 +69,6 @@ func _set_can_hit_enemy(new_can_hit_enemy: bool) -> void:
 
 
 func _ready() -> void:
-	# Forzamos las colisiones por si el editor falla
 	contact_monitor = true
 	max_contacts_reported = 5
 	if not body_entered.is_connected(_on_body_entered):
@@ -78,6 +79,12 @@ func _ready() -> void:
 		trail_fx_marker.add_child(_trail_particles)
 
 	_set_color(color)
+	
+	if is_contaminated:
+		animated_sprite_2d.modulate = Color(0.4, 0.9, 0.4, 0.8)
+
+	set_collision_layer_value(11, true)
+	set_collision_layer_value(12, false)
 
 	duration_timer.wait_time = duration
 	duration_timer.start()
@@ -88,7 +95,6 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	visible_things.rotation = linear_velocity.angle()
 	
-	# PERSECUCIÓN DEL TARGET (Cuando es repelido por el escudo)
 	if node_to_follow and is_instance_valid(node_to_follow):
 		var direction_to_target: Vector2 = global_position.direction_to(node_to_follow.global_position)
 		constant_force = direction_to_target * speed
@@ -110,16 +116,16 @@ func _on_body_entered(body: Node2D) -> void:
 	add_small_fx()
 	duration_timer.start()
 
-	# --- COLISIÓN FÍSICA NATIVA CONTRA FLORESTA ---
 	if body.has_method("defeat"):
-		body.defeat()
-		explode()
+		if is_contaminated:
+			body.defeat()
+			explode()
 		return
 	elif body.owner and body.owner.has_method("defeat"):
-		body.owner.defeat()
-		explode()
+		if is_contaminated:
+			body.owner.defeat()
+			explode()
 		return
-	# ----------------------------------------------
 
 	if body.owner is FragileBarrel:
 		body.owner.hit_by_droplet(label)
@@ -127,18 +133,27 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 
 	if body.owner is FillingBarrel:
+		if is_contaminated:
+			explode()
+			return
+			
 		var filling_barrel: FillingBarrel = body.owner as FillingBarrel
 		if filling_barrel.label == label:
 			filling_barrel.increment()
+			
+			# --- AVISO AL JEFE DE BOTELLA RECICLADA ---
+			get_tree().call_group("throwing_enemy", "bottle_recycled")
+			
 			queue_free()
 
 
-# AQUÍ ESTÁ LA FUNCIÓN QUE PREGUNTABAS:
 func got_repelled(repel_direction: Vector2) -> void:
+	if is_contaminated:
+		purify_projectile()
+		
 	add_small_fx()
 	duration_timer.start()
 
-	# Redirección inteligente hacia los contenedores de reciclaje
 	var barrels = get_tree().get_nodes_in_group("filling_barrels")
 	for barrel in barrels:
 		if not barrel.is_locked:
@@ -153,6 +168,19 @@ func got_repelled(repel_direction: Vector2) -> void:
 		_trail_particles.amount_ratio = 1.
 	linear_velocity = Vector2.ZERO
 	apply_impulse(hit_vector)
+
+
+func purify_projectile() -> void:
+	is_contaminated = false
+	print("✨ ¡Botella purificada por Floresta!")
+	
+	var tween = create_tween()
+	tween.tween_property(animated_sprite_2d, "modulate", Color.WHITE, 0.2)
+	
+	set_collision_layer_value(11, false)
+	set_collision_layer_value(12, true)
+	
+	set_collision_mask_value(14, true)
 
 
 func explode() -> void:
@@ -175,8 +203,8 @@ func remove() -> void:
 
 
 func _on_damage_area_area_entered(area: Area2D) -> void:
-	# Como el área es parte de Floresta, buscamos al "dueño" del área
 	if area.owner and area.owner.has_method("defeat"):
-		print("¡Impacto físico nativo contra Floresta!")
-		area.owner.defeat()
-		explode()
+		if is_contaminated:
+			print("¡Impacto físico nativo contra Floresta!")
+			area.owner.defeat()
+			explode()

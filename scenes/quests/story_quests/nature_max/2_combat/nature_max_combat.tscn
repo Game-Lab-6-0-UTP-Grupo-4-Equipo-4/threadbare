@@ -70,7 +70,6 @@ sprite_frames = ExtResource("9_eiisa")
 position = Vector2(640, 338)
 sprite_frames = ExtResource("11_xw4qf")
 projectile_scene = ExtResource("12_5qxpd")
-projectile_speed = 110.0
 walking_time = 2.0
 walking_range = 150.0
 walking_speed = 75.0
@@ -78,41 +77,48 @@ walking_speed = 75.0
 [node name="Target" parent="OnTheGround" unique_id=1718603548 instance=ExtResource("13_f7610")]
 position = Vector2(502, 164)
 sprite_frames = ExtResource("14_xw4qf")
+needed_amount = 5
 label = ""
 color = Color(1, 1, 1, 1)
 
 [node name="Target2" parent="OnTheGround" unique_id=711725062 instance=ExtResource("13_f7610")]
 position = Vector2(758, 164)
 sprite_frames = ExtResource("14_xw4qf")
+needed_amount = 5
 label = ""
 color = Color(1, 1, 1, 1)
 
 [node name="Target3" parent="OnTheGround" unique_id=1832726000 instance=ExtResource("13_f7610")]
 position = Vector2(761, 497)
 sprite_frames = ExtResource("14_xw4qf")
+needed_amount = 5
 label = ""
 color = Color(1, 1, 1, 1)
 
 [node name="Target4" parent="OnTheGround" unique_id=857122250 instance=ExtResource("13_f7610")]
 position = Vector2(632, 497)
 sprite_frames = ExtResource("14_xw4qf")
+needed_amount = 5
 label = ""
 color = Color(1, 1, 1, 1)
 
 [node name="Target5" parent="OnTheGround" unique_id=1348280126 instance=ExtResource("13_f7610")]
 position = Vector2(633, 164)
 sprite_frames = ExtResource("14_xw4qf")
+needed_amount = 5
 label = ""
 color = Color(1, 1, 1, 1)
 
 [node name="Target6" parent="OnTheGround" unique_id=1005497940 instance=ExtResource("13_f7610")]
 position = Vector2(501, 497)
 sprite_frames = ExtResource("14_xw4qf")
+needed_amount = 5
 label = ""
 color = Color(1, 1, 1, 1)
 
 [node name="CollectibleItem" parent="OnTheGround" unique_id=1864193206 instance=ExtResource("15_t8ilv")]
 unique_name_in_owner = true
+visible = false
 position = Vector2(868, 303)
 revealed = false
 next_scene = "uid://c1pubeytexvw2"
@@ -121,6 +127,7 @@ collected_dialogue = ExtResource("3_t0dmh")
 dialogue_title = &"well_done"
 
 [node name="RepelPowerup" parent="OnTheGround" unique_id=1795462717 instance=ExtResource("17_i7gxl")]
+visible = false
 position = Vector2(114, 488)
 highlight_color = Color(0, 0.4392157, 1, 1)
 
