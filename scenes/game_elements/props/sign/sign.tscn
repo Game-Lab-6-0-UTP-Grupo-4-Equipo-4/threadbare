@@ -11,7 +11,7 @@ radius = 12.0
 height = 50.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_85li6"]
-radius = 80.0
+radius = 51.0
 
 [node name="Sign" type="Node2D" unique_id=1579530966]
 script = ExtResource("1_cb2ey")
@@ -57,7 +57,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_1ap0m")
 theme_override_font_sizes/font_size = 19
-text = "West End"
+text = "Memoriza el patrón para evitar la contaminación."
 horizontal_alignment = 1
 vertical_alignment = 2
 
@@ -65,6 +65,7 @@ vertical_alignment = 2
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=966380620]
+position = Vector2(2, -33)
 shape = SubResource("CircleShape2D_85li6")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1797167108 groups=["night-lights"]]

@@ -10,7 +10,7 @@ extends Node2D
 			return
 		update_appearance()
 
-@export_multiline var text: String = "":
+@export_multiline var text: String = "Memoriza el patrón para evitar la contaminación.":
 	set(a_text):
 		text = a_text
 		update_label_text()

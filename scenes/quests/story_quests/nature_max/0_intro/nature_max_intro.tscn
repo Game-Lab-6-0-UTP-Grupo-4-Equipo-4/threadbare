@@ -72,6 +72,7 @@ sources/1 = SubResource("TileSetAtlasSource_rjq2e")
 
 [node name="Outro" type="Node2D" unique_id=1315060956]
 texture_filter = 1
+position = Vector2(6, -25)
 
 [node name="HUD" parent="." unique_id=703834944 instance=ExtResource("1_7chpj")]
 
@@ -116,33 +117,33 @@ metadata/_custom_type_script = "uid://x1mxt6bmei2o"
 [node name="Trees" type="Node" parent="." unique_id=1243134056]
 
 [node name="Tree" parent="Trees" unique_id=19613488 instance=ExtResource("8_d1t51")]
-position = Vector2(239, 222)
+position = Vector2(245, 197)
 scale = Vector2(0.994779, 1.07908)
 
 [node name="Tree2" parent="Trees" unique_id=1001710275 instance=ExtResource("8_d1t51")]
-position = Vector2(674, 159)
+position = Vector2(680, 134)
 scale = Vector2(0.994779, 1.07908)
 
 [node name="Tree6" parent="Trees" unique_id=1833326406 instance=ExtResource("8_d1t51")]
-position = Vector2(864, 138)
+position = Vector2(870, 113)
 scale = Vector2(0.994779, 1.07908)
 
 [node name="Tree7" parent="Trees" unique_id=775128770 instance=ExtResource("8_d1t51")]
-position = Vector2(692, 258)
+position = Vector2(698, 233)
 scale = Vector2(0.994779, 1.07908)
 
 [node name="Tree8" parent="Trees" unique_id=1749366364 instance=ExtResource("8_d1t51")]
-position = Vector2(884, 258)
+position = Vector2(890, 233)
 scale = Vector2(0.994779, 1.07908)
 
 [node name="Tree3" parent="Trees" unique_id=454742936 instance=ExtResource("8_d1t51")]
-position = Vector2(328, 560)
+position = Vector2(334, 535)
 scale = Vector2(0.994779, 1.07908)
 
 [node name="Tree4" parent="Trees" unique_id=494817032 instance=ExtResource("8_d1t51")]
-position = Vector2(190, 528)
+position = Vector2(196, 503)
 scale = Vector2(0.994779, 1.07908)
 
 [node name="Tree5" parent="Trees" unique_id=351601667 instance=ExtResource("8_d1t51")]
-position = Vector2(361, 155)
+position = Vector2(367, 130)
 scale = Vector2(0.994779, 1.07908)
