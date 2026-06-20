@@ -18,15 +18,15 @@ const COLORS_PER_TYPE: Dictionary[ItemType, Color] = {
 }
 
 const HUD_TEXTURES: Dictionary[ItemType, Texture2D] = {
-	ItemType.MEMORY: preload("uid://brspc1u02oawt"),
-	ItemType.IMAGINATION: preload("uid://wyiamtqmp4gk"),
-	ItemType.SPIRIT: preload("uid://c4fefrg0tfkpl")
+	ItemType.MEMORY: preload("D:/Game_Team04/NatureMax/threadbare/scenes/quests/story_quests/nature_max/mis_mosaicos/primersimboloderecompensa.png"),
+	ItemType.IMAGINATION: preload("D:/Game_Team04/NatureMax/threadbare/scenes/quests/story_quests/nature_max/mis_mosaicos/segundosimboloderecompensa.png"),
+	ItemType.SPIRIT: preload("D:/Game_Team04/NatureMax/threadbare/scenes/quests/story_quests/nature_max/mis_mosaicos/primer-recompensaHUB.png")
 }
 
 const WORLD_TEXTURES: Dictionary[ItemType, Texture2D] = {
-	ItemType.MEMORY: preload("uid://5wscjc8yqqts"),
-	ItemType.IMAGINATION: preload("uid://6bf8rum68wq3"),
-	ItemType.SPIRIT: preload("uid://cepg1o3ihp055")
+	ItemType.MEMORY: preload("D:/Game_Team04/NatureMax/threadbare/scenes/quests/story_quests/nature_max/mis_mosaicos/primersimboloderecompensa.png"),
+	ItemType.IMAGINATION: preload("D:/Game_Team04/NatureMax/threadbare/scenes/quests/story_quests/nature_max/mis_mosaicos/segundosimboloderecompensa.png"),
+	ItemType.SPIRIT: preload("D:/Game_Team04/NatureMax/threadbare/scenes/quests/story_quests/nature_max/mis_mosaicos/primer-recompensaHUB.png")
 }
 
 @export var name: String

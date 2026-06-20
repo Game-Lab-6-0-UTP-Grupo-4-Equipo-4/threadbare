@@ -57,7 +57,7 @@ tile_map_data = PackedByteArray("AAACAAcAAQAFAAMAAAADAAcAAQAHAAIAAAADAAYAAQAIAAE
 tile_set = ExtResource("4_ic8f2")
 
 [node name="Butterfly" parent="TileMapLayers" unique_id=488734917 instance=ExtResource("5_6yi8w")]
-position = Vector2(201, 297)
+position = Vector2(240, 291)
 
 [node name="Butterfly2" parent="TileMapLayers" unique_id=1275065248 instance=ExtResource("5_6yi8w")]
 position = Vector2(744, 539)
@@ -97,18 +97,6 @@ limit_left = -56
 limit_top = -56
 limit_right = 1032
 limit_bottom = 712
-position_smoothing_enabled = true
-editor_draw_limits = true
-
-[node name="Player" parent="OnTheGround/Player" unique_id=296354958 instance=ExtResource("5_fje8f")]
-position = Vector2(153, 496)
-sprite_frames = ExtResource("6_6yi8w")
-
-[node name="Camera2D" type="Camera2D" parent="OnTheGround/Player/Player" unique_id=433266564]
-limit_left = -64
-limit_top = -64
-limit_right = 1024
-limit_bottom = 704
 position_smoothing_enabled = true
 editor_draw_limits = true
 
@@ -189,7 +177,7 @@ dialogue_title = &"well_done"
 next_scene = "uid://cedwlc4s1w2rd"
 
 [node name="Sign" parent="OnTheGround" unique_id=263994380 instance=ExtResource("23_g0d7d")]
-position = Vector2(148, 435)
+position = Vector2(164, 437)
 direction = 1
 text = "Memoriza el patrón para 
 evitar la contaminación."
