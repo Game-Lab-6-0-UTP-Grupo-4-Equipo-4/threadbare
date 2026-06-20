@@ -1,10 +1,12 @@
 [gd_scene format=4 uid="uid://dn2mfgimcfji0"]
 
 [ext_resource type="TileSet" uid="uid://nlb0o2iaogfd" path="res://scenes/quests/story_quests/nature_max/tiles/nature_max_exterior_floors.tres" id="1_2kdrr"]
+[ext_resource type="TileSet" uid="uid://bjx3gvah0ycl1" path="res://tiles/foam_2.tres" id="1_y14wn"]
 [ext_resource type="SpriteFrames" uid="uid://bdvu20sxgtt0o" path="res://scenes/quests/story_quests/nature_max/player_components/nature_max_player.tres" id="3_7chpj"]
 [ext_resource type="TileSet" uid="uid://oynx002hv8tl" path="res://tiles/water.tres" id="3_vvfw4"]
 [ext_resource type="Script" uid="uid://x1mxt6bmei2o" path="res://scenes/ui_elements/cinematic/cinematic.gd" id="4_vvfw4"]
 [ext_resource type="Resource" uid="uid://dk4bqtpaudhh8" path="res://scenes/quests/story_quests/nature_max/0_intro/intro_components/nature_max_intro.dialogue" id="5_cwbpk"]
+[ext_resource type="TileSet" uid="uid://dmg13wgcc7so5" path="res://scenes/quests/story_quests/renya_beyond_sorrow/renya_tileset.tres" id="5_d1t51"]
 [ext_resource type="PackedScene" uid="uid://v3usqiwy5wpr" path="res://scenes/game_elements/props/decoration/rock/rock.tscn" id="6_cfeoo"]
 [ext_resource type="Texture2D" uid="uid://dcddf14jg7iyg" path="res://scenes/quests/story_quests/nature_max/mis_mosaicos/totora.png" id="8_7chpj"]
 [ext_resource type="Texture2D" uid="uid://bv5fd5400g8b3" path="res://scenes/quests/story_quests/nature_max/mis_mosaicos/primersimboloderecompensa.png" id="8_cwbpk"]
@@ -104,6 +106,11 @@ _data = {
 
 [node name="TileMapLayers" type="Node2D" parent="." unique_id=591504591]
 
+[node name="Foam" type="TileMapLayer" parent="TileMapLayers" unique_id=853051989]
+modulate = Color(1, 1, 1, 0.70980394)
+tile_map_data = PackedByteArray("AAADAP7/AgAAAAAAAAACAAAAAgAAAAAAAAADAAAAAgAAAAAAAAAEAAAAAgAAAAAAAAAEAAEAAgAAAAAAAAAEAAIAAgAAAAAAAAAFAAIAAgAAAAAAAAAFAAEAAgAAAAAAAAAGAAEAAgAAAAAAAAAHAAIAAgAAAAAAAAAHAAMAAgAAAAAAAAAHAAQAAgAAAAAAAAAGAAQAAgAAAAAAAAAIAAQAAgAAAAAAAAAJAAQAAgAAAAAAAAAKAAQAAgAAAAAAAAAKAAMAAgAAAAAAAAALAAIAAgAAAAAAAAAMAAIAAgAAAAAAAAAKAAIAAgAAAAAAAAANAAEAAgAAAAAAAAAOAAEAAgAAAAAAAAAPAAEAAgAAAAAAAAAQAAEAAgAAAAAAAAAOAAIAAgAAAAAAAAAOAAMAAgAAAAAAAAAOAAQAAgAAAAAAAAAOAAUAAgAAAAAAAAABAAIAAgAAAAAAAAACAAIAAgAAAAAAAAACAAMAAgAAAAAAAAACAAQAAgAAAAAAAAADAAQAAgAAAAAAAAAEAAQAAgAAAAAAAAAEAAUAAgAAAAAAAAAEAAYAAgAAAAAAAAAFAAYAAgAAAAAAAAAFAAcAAgAAAAAAAAAGAAcAAgAAAAAAAAAHAAcAAgAAAAAAAAAHAAYAAgAAAAAAAAAIAAYAAgAAAAAAAAAIAAcAAgAAAAAAAAAJAAcAAgAAAAAAAAAKAAcAAgAAAAAAAAAKAAYAAgAAAAAAAAALAAYAAgAAAAAAAAAMAAYAAgAAAAAAAAAMAAUAAgAAAAAAAAAMAAQAAgAAAAAAAAAMAAcAAgAAAAAAAAANAAcAAgAAAAAAAAAOAAcAAgAAAAAAAAAPAAcAAgAAAAAAAAAQAAcAAgAAAAAAAAAQAAYAAgAAAAAAAAAQAAUAAgAAAAAAAAAQAAQAAgAAAAAAAAAQAAMAAgAAAAAAAAAAAAIAAgAAAAAAAAAAAAEAAgAAAAAAAAAAAAAAAgAAAAAAAAAQAAgAAgAAAAAAAAAQAAkAAgAAAAAAAAAPAAkAAgAAAAAAAAAPAAgAAgAAAAAAAAAOAAgAAgAAAAAAAAANAAgAAgAAAAAAAAAMAAgAAgAAAAAAAAALAAgAAgAAAAAAAAAKAAgAAgAAAAAAAAAJAAgAAgAAAAAAAAAIAAgAAgAAAAAAAAAHAAgAAgAAAAAAAAAGAAgAAgAAAAAAAAAFAAgAAgAAAAAAAAAEAAgAAgAAAAAAAAADAAgAAgAAAAAAAAACAAgAAgAAAAAAAAABAAgAAgAAAAAAAAAAAAgAAgAAAAAAAAAAAAcAAgAAAAAAAAABAAcAAgAAAAAAAAACAAcAAgAAAAAAAAADAAcAAgAAAAAAAAAEAAcAAgAAAAAAAAADAAYAAgAAAAAAAAACAAYAAgAAAAAAAAABAAYAAgAAAAAAAAAAAAYAAgAAAAAAAAAOAAkAAgAAAAAAAAANAAkAAgAAAAAAAAAMAAkAAgAAAAAAAAALAAkAAgAAAAAAAAAKAAkAAgAAAAAAAAAIAAkAAgAAAAAAAAAHAAkAAgAAAAAAAAABAAkAAgAAAAAAAAAAAAkAAgAAAAAAAAACAAkAAgAAAAAAAAADAAkAAgAAAAAAAAAEAAkAAgAAAAAAAAAFAAkAAgAAAAAAAAAGAAkAAgAAAAAAAAAJAAkAAgAAAAAAAAALAAcAAgAAAAAAAAA=")
+tile_set = ExtResource("1_y14wn")
+
 [node name="Ground" type="TileMapLayer" parent="TileMapLayers" unique_id=397514282]
 tile_set = ExtResource("1_2kdrr")
 
@@ -155,14 +162,9 @@ metadata/_custom_type_script = "uid://x1mxt6bmei2o"
 [node name="Rock" parent="." unique_id=912112339 instance=ExtResource("6_cfeoo")]
 position = Vector2(479, 293)
 
-[node name="Primersimboloderecompensa" type="Sprite2D" parent="." unique_id=180314096]
-position = Vector2(601, 175.99998)
-scale = Vector2(0.5625, 0.765625)
-texture = ExtResource("8_cwbpk")
-
 [node name="Primersimboloderecompensa2" type="Sprite2D" parent="." unique_id=127303068]
-position = Vector2(254, 389)
-scale = Vector2(0.859375, 0.859375)
+position = Vector2(228, 97)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_cwbpk")
 
 [node name="Primersimboloderecompensa3" type="Sprite2D" parent="Primersimboloderecompensa2" unique_id=1360424391]

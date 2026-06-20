@@ -113,6 +113,7 @@ color = Color(1, 1, 1, 1)
 
 [node name="CollectibleItem" parent="OnTheGround" unique_id=1864193206 instance=ExtResource("15_t8ilv")]
 unique_name_in_owner = true
+visible = false
 position = Vector2(868, 303)
 revealed = false
 next_scene = "uid://c1pubeytexvw2"
@@ -121,6 +122,7 @@ collected_dialogue = ExtResource("3_t0dmh")
 dialogue_title = &"well_done"
 
 [node name="RepelPowerup" parent="OnTheGround" unique_id=1795462717 instance=ExtResource("17_i7gxl")]
+visible = false
 position = Vector2(114, 488)
 highlight_color = Color(0, 0.4392157, 1, 1)
 

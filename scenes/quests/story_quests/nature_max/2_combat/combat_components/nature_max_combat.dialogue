@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: MPL-2.0
 
 ~ start
-Something in this scene will throw projectiles at you. The goal is to redirect them toward the targets.
-Explore the Scene Tree to add, change, or remove elements.
+Después de superar el laberinto, Floresta llega a una zona del Lago Titicaca gravemente afectada por la contaminación. Allí descubre a un Monstruo de los Desechos, una criatura que se alimenta de la basura acumulada
+Para proteger su fuente de alimento, el monstruo lanza botellas de plástico con contra Floresta.
 => END
 
 ~ well_done

@@ -37,6 +37,10 @@ extends RigidBody2D
 
 var _trail_particles: GPUParticles2D
 
+# --- ESTADO DE PURIFICACIÓN ---
+var is_contaminated: bool = true
+# ------------------------------
+
 @onready var visible_things: Node2D = %VisibleThings
 @onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
 @onready var trail_fx_marker: Marker2D = %TrailFXMarker
@@ -78,6 +82,12 @@ func _ready() -> void:
 		trail_fx_marker.add_child(_trail_particles)
 
 	_set_color(color)
+	
+	if is_contaminated:
+		animated_sprite_2d.modulate = Color(0.4, 0.9, 0.4, 0.8)
+
+	set_collision_layer_value(11, true)
+	set_collision_layer_value(12, false)
 
 	duration_timer.wait_time = duration
 	duration_timer.start()
@@ -127,14 +137,25 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 
 	if body.owner is FillingBarrel:
+		if is_contaminated:
+			explode()
+			return
+			
 		var filling_barrel: FillingBarrel = body.owner as FillingBarrel
 		if filling_barrel.label == label:
 			filling_barrel.increment()
+			
+			# --- AVISO AL JEFE DE BOTELLA RECICLADA ---
+			get_tree().call_group("throwing_enemy", "bottle_recycled")
+			
 			queue_free()
 
 
 # AQUÍ ESTÁ LA FUNCIÓN QUE PREGUNTABAS:
 func got_repelled(repel_direction: Vector2) -> void:
+	if is_contaminated:
+		purify_projectile()
+		
 	add_small_fx()
 	duration_timer.start()
 
@@ -153,6 +174,19 @@ func got_repelled(repel_direction: Vector2) -> void:
 		_trail_particles.amount_ratio = 1.
 	linear_velocity = Vector2.ZERO
 	apply_impulse(hit_vector)
+
+
+func purify_projectile() -> void:
+	is_contaminated = false
+	print("✨ ¡Botella purificada por Floresta!")
+	
+	var tween = create_tween()
+	tween.tween_property(animated_sprite_2d, "modulate", Color.WHITE, 0.2)
+	
+	set_collision_layer_value(11, false)
+	set_collision_layer_value(12, true)
+	
+	set_collision_mask_value(14, true)
 
 
 func explode() -> void:

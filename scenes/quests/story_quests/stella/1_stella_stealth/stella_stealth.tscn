@@ -218,7 +218,7 @@ tile_set = ExtResource("5_iqom2")
 tile_set = ExtResource("4_l3kdm")
 
 [node name="Player" parent="." unique_id=1098139999 instance=ExtResource("3_qvtgt")]
-position = Vector2(108, 385)
+position = Vector2(108, 386)
 player_name = "Stella"
 sprite_frames = ExtResource("4_rlkm0")
 
@@ -2754,7 +2754,7 @@ position = Vector2(1960, 1847)
 scale = Vector2(0.756363, 0.773944)
 
 [node name="Tree497" parent="." unique_id=381113443 instance=ExtResource("16_0ownb")]
-position = Vector2(509, 2789)
+position = Vector2(513, 2789.0002)
 scale = Vector2(1.04798, 1.03294)
 
 [node name="Rocks" type="Node2D" parent="." unique_id=1477687283]
