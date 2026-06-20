@@ -494,9 +494,9 @@ debug_color = Color(0, 0, 0, 0.42)
 
 [node name="CollectibleItem" parent="." unique_id=1494033634 instance=ExtResource("8_jobnx")]
 position = Vector2(451, 775)
-next_scene = "uid://bfr7svwx5hqkf"
 item = SubResource("Resource_idy4y")
 collected_dialogue = ExtResource("12_rlkm0")
+next_scene = "uid://bfr7svwx5hqkf"
 
 [node name="Flame" type="AnimatedSprite2D" parent="." unique_id=968837256]
 position = Vector2(448, 675)

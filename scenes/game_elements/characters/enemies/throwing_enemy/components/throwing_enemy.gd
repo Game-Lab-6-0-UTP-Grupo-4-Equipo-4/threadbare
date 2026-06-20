@@ -45,8 +45,11 @@ const WALK_TARGET_SKIP_RANGE: float = 0.25
 		projectile_scene_for_label = new_value
 		update_configuration_warnings()
 
+# --- VELOCIDAD EXTREMA DESDE LA FASE 1 ---
+# Aumentamos el límite del slider a 200 y el valor por defecto a 90 (antes 30)
 @export_range(10., 200., 5., "or_greater", "or_less", "suffix:m/s")
-var projectile_speed: float = 110.0
+var projectile_speed: float = 90.0 
+# -----------------------------------------
 
 @export_range(0., 10., 0.1, "or_greater", "suffix:s") var projectile_duration: float = 5.0
 @export var projectile_follows_player: bool = false
@@ -67,6 +70,7 @@ var projectile_speed: float = 110.0
 var allowed_labels: Array[String] = ["???"]
 var color_per_label: Dictionary[String, Color]
 
+var _player: Node2D
 var _initial_position: Vector2
 var _target_position: Vector2
 var _is_attacking: bool
@@ -74,7 +78,6 @@ var _is_defeated: bool
 var _has_started: bool = false
 
 var current_phase: int = 1
-var total_bottles_recycled: int = 0
 
 @onready var timer: Timer = %Timer
 @onready var projectile_marker: Marker2D = %ProjectileMarker
@@ -112,10 +115,10 @@ func _ready() -> void:
 	_set_sprite_frames(sprite_frames)
 	if Engine.is_editor_hint():
 		return
-	var player: Player = get_tree().get_first_node_in_group("player")
-	if is_instance_valid(player):
+	_player = get_tree().get_first_node_in_group("player") as Node2D
+	if is_instance_valid(_player):
 		var direction: Vector2 = projectile_marker.global_position.direction_to(
-			player.global_position
+			_player.global_position
 		)
 		scale.x = 1 if direction.x < 0 else -1
 	if autostart:
@@ -200,8 +203,7 @@ func _set_target_position() -> void:
 
 
 func _on_timeout() -> void:
-	var player: Player = get_tree().get_first_node_in_group("player")
-	if not is_instance_valid(player):
+	if not is_instance_valid(_player):
 		return
 	_is_attacking = true
 	animation_player.play(&"attack")
@@ -295,7 +297,7 @@ func start() -> void:
 	timer.start()
 	_initial_position = position
 	_set_target_position()
-	print("FASE 1: ¡El jefe dispara proyectiles a 110 m/s!")
+	print("🎯 FASE 1: ¡El jefe dispara proyectiles a 110 m/s!")
 
 
 func remove() -> void:
@@ -306,48 +308,21 @@ func remove() -> void:
 	queue_free()
 
 
-func bottle_recycled() -> void:
-	total_bottles_recycled += 1
-	print("🍾 ¡Botella reciclada! Total acertadas: ", total_bottles_recycled)
-	
-	if total_bottles_recycled == 9 and current_phase == 1:
-		await _play_enrage_animation("FASE 2")
-		
+func change_phase(barrels_completed: int) -> void:
+	if barrels_completed == 2:
 		current_phase = 2
 		throwing_period = 1.2
 		walking_speed = 100.0
-		projectile_speed = 140.0
+		projectile_speed = 140.0 # Más rápido en fase 2
 		timer.wait_time = throwing_period
-		print("FASE 2: ¡Disparo Doble y proyectiles a 140 m/s!")
-		
-	elif total_bottles_recycled == 21 and current_phase == 2:
-		await _play_enrage_animation("FASE 3")
-		
+		print("😡 FASE 2: ¡Disparo Doble y proyectiles a 140 m/s!")
+	elif barrels_completed == 4:
 		current_phase = 3
 		throwing_period = 0.6
 		walking_speed = 150.0
-		projectile_speed = 170.0
+		projectile_speed = 170.0 # Ultra rápido en fase 3
 		timer.wait_time = throwing_period
-		print("FASE 3: Disparo triple a 170 m/s.")
-
-
-func _play_enrage_animation(phase_name: String) -> void:
-	print("⚠️ EL MONSTRUO ESTÁ EVOLUCIONANDO A " + phase_name + "...")
-	
-	_is_attacking = true 
-	timer.stop()
-	
-	var tween = create_tween()
-	tween.tween_property(animated_sprite_2d, "modulate", Color(2.0, 0.2, 0.2, 1.0), 0.4)
-	tween.parallel().tween_property(animated_sprite_2d, "scale", Vector2(1.2, 1.2), 0.4)
-	
-	tween.tween_property(animated_sprite_2d, "modulate", Color.WHITE, 0.4)
-	tween.parallel().tween_property(animated_sprite_2d, "scale", Vector2(1.0, 1.0), 0.4)
-	
-	await get_tree().create_timer(1.0).timeout 
-	
-	_is_attacking = false
-	timer.start()
+		print("🤬 FASE 3: ¡MODO CUPHEAD! Disparo triple a 170 m/s.")
 
 
 func _set_idle_sound_stream(new_value: AudioStream) -> void:

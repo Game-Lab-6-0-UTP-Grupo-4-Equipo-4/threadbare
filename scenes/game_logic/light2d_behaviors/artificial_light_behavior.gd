@@ -47,10 +47,16 @@ func _get_configuration_warnings() -> PackedStringArray:
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
+
 	initial_energy = light.energy
-	light.visible = GameState.lights_on
-	light.enabled = GameState.lights_on
-	GameState.lights_changed.connect(_on_lights_changed)
+
+	if GameState.scene == null:
+		push_error("GameState.scene es null")
+		return
+
+	light.visible = GameState.scene.lights_on
+	light.enabled = GameState.scene.lights_on
+	GameState.scene.lights_changed.connect(_on_lights_changed)
 
 
 func _on_lights_changed(lights_on: bool, immediate: bool) -> void:
