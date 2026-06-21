@@ -314,7 +314,7 @@ _data = {
 size = Vector2(32, 47)
 
 [sub_resource type="Animation" id="Animation_wvgcx"]
-length = 0.001
+length = 1.4333333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -391,7 +391,6 @@ rotation = -1.5708
 shape = SubResource("CapsuleShape2D_3vyb7")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=460659966 groups=["night-lights"]]
-visible = false
 visibility_layer = 2
 scale = Vector2(4, 3)
 enabled = false
@@ -423,11 +422,13 @@ debug_color = Color(0.600391, 0.54335, 0, 0.42)
 
 [node name="PlayerRepel" parent="." unique_id=1324972992 instance=ExtResource("12_tnibl")]
 unique_name_in_owner = true
+visible = false
 position = Vector2(0, -24)
 error_sound = ExtResource("12_ecbbk")
 
 [node name="PlayerHook" parent="." unique_id=1972626703 node_paths=PackedStringArray("character") instance=ExtResource("13_ecbbk")]
 unique_name_in_owner = true
+visible = false
 position = Vector2(0, -20)
 character = NodePath("..")
 

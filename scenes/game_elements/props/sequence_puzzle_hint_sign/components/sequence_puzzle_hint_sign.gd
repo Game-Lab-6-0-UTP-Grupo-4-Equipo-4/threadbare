@@ -67,7 +67,7 @@ var interactive_hint: bool = false:
 
 @onready var solved_player: AudioStreamPlayer2D = %SolvedPlayer
 @onready var solved_ambient_player: AudioStreamPlayer2D = %SolvedAmbientPlayer
-
+@onready var error_player: AudioStreamPlayer2D = $ErrorPlayer
 
 func _ready() -> void:
 	_set_sprite_frames(sprite_frames)

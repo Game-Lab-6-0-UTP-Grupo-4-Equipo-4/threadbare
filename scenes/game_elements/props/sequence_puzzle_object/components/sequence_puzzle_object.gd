@@ -38,7 +38,9 @@ var strike_duration: float = 1.0
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite2D
 @onready var interact_area: InteractArea = %InteractArea
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = %AudioStreamPlayer2D
-
+@export var disable_attack := false
+	if not disable_attack and Input.is_action_just_pressed("attack"):
+		attack()
 
 func _set_sprite_frames(new_sprite_frames: SpriteFrames) -> void:
 	sprite_frames = new_sprite_frames
