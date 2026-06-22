@@ -1,9 +1,9 @@
 # SPDX-FileCopyrightText: The Threadbare Authors
 # SPDX-License-Identifier: MPL-2.0
 @tool
-class_name Player
-extends CharacterBody2D
 
+extends CharacterBody2D
+class_name Player
 signal mode_changed(mode: Mode)
 
 ## The possible player states.
