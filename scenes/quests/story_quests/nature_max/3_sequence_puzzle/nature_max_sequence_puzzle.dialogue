@@ -1,10 +1,24 @@
 # SPDX-FileCopyrightText: The Threadbare Authors
 # SPDX-License-Identifier: MPL-2.0
 ~ start
-Floresta: Encontraré la pista para el otro monstruo de la contaminación
-Floresta: Debo de completar la melodía para saber quién es.....
+
+Después de superar al Monstruo de los Desechos Floresta llega hasta una pequeña isla de totora.
+
+Floresta: Hay algo extraño en el aire...
+
+Floresta: Esta melodía... parece una pista.
+
+Floresta: Si la sigo, encontraré la verdad.
 
 => END
 ~ well_done
-VOZ MISTERIOSA: Bien hecho! El otro monstruo del medio ambiente es...
+
+VOZ MISTERIOSA: Has descifrado la señal...
+
+VOZ MISTERIOSA: El origen de la contaminación aún está oculto...
+
+Floresta: Entonces... esto no ha terminado.
+
+Floresta: Debo seguir esta pista.
+
 => END

@@ -1,10 +1,11 @@
 # SPDX-FileCopyrightText: The Threadbare Authors
 # SPDX-License-Identifier: MPL-2.0
 ~ start
+Floresta: Este lugar... parece un laberinto de desechos.
 Botella de plástico: Hola Floresta ,oímos de tu viaje en el Lago.
 Botella de plástico: ¿Intentas quitarnos nuestras bolsas de plástico, lo único que tenemos para subsistir?
 Floresta: Botellas de plástico, dañan el medio ambiente, dañan a seres vivos.
 Botella de plástico: “Nosotros no nos rendimos, el Lago es nuestro”
-Floresta: Estoy convencida que todo cambiará....
-
+Floresta: Solo quiero restaurar el equilibrio del lago.
+Botellas de plástico: ¡Entonces no pasarás!
 => END
