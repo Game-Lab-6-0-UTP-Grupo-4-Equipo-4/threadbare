@@ -30,7 +30,9 @@ extends RigidBody2D
 @export_group("FXs")
 
 @export var small_fx_scene: PackedScene
+
 @export var big_fx_scene: PackedScene
+
 @export var trail_fx_scene: PackedScene
 
 var _trail_particles: GPUParticles2D
@@ -69,6 +71,7 @@ func _set_can_hit_enemy(new_can_hit_enemy: bool) -> void:
 
 
 func _ready() -> void:
+	# Forzamos las colisiones por si el editor falla
 	contact_monitor = true
 	max_contacts_reported = 5
 	if not body_entered.is_connected(_on_body_entered):
@@ -95,6 +98,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	visible_things.rotation = linear_velocity.angle()
 	
+	# PERSECUCIÓN DEL TARGET (Cuando es repelido por el escudo)
 	if node_to_follow and is_instance_valid(node_to_follow):
 		var direction_to_target: Vector2 = global_position.direction_to(node_to_follow.global_position)
 		constant_force = direction_to_target * speed
@@ -116,16 +120,16 @@ func _on_body_entered(body: Node2D) -> void:
 	add_small_fx()
 	duration_timer.start()
 
+	# --- COLISIÓN FÍSICA NATIVA CONTRA FLORESTA ---
 	if body.has_method("defeat"):
-		if is_contaminated:
-			body.defeat()
-			explode()
+		body.defeat()
+		explode()
 		return
 	elif body.owner and body.owner.has_method("defeat"):
-		if is_contaminated:
-			body.owner.defeat()
-			explode()
+		body.owner.defeat()
+		explode()
 		return
+	# ----------------------------------------------
 
 	if body.owner is FragileBarrel:
 		body.owner.hit_by_droplet(label)
@@ -147,6 +151,7 @@ func _on_body_entered(body: Node2D) -> void:
 			queue_free()
 
 
+# AQUÍ ESTÁ LA FUNCIÓN QUE PREGUNTABAS:
 func got_repelled(repel_direction: Vector2) -> void:
 	if is_contaminated:
 		purify_projectile()
@@ -154,6 +159,7 @@ func got_repelled(repel_direction: Vector2) -> void:
 	add_small_fx()
 	duration_timer.start()
 
+	# Redirección inteligente hacia los contenedores de reciclaje
 	var barrels = get_tree().get_nodes_in_group("filling_barrels")
 	for barrel in barrels:
 		if not barrel.is_locked:
@@ -203,8 +209,8 @@ func remove() -> void:
 
 
 func _on_damage_area_area_entered(area: Area2D) -> void:
+	# Como el área es parte de Floresta, buscamos al "dueño" del área
 	if area.owner and area.owner.has_method("defeat"):
-		if is_contaminated:
-			print("¡Impacto físico nativo contra Floresta!")
-			area.owner.defeat()
-			explode()
+		print("¡Impacto físico nativo contra Floresta!")
+		area.owner.defeat()
+		explode()
