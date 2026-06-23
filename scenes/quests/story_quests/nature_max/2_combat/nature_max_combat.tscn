@@ -14,12 +14,12 @@
 [ext_resource type="PackedScene" uid="uid://bsuxvx60xbjxe" path="res://scenes/quests/story_quests/nature_max/2_combat/combat_components/nature_max_projectile.tscn" id="12_5qxpd"]
 [ext_resource type="PackedScene" uid="uid://y8ha8abfyap2" path="res://scenes/game_elements/props/filling_barrel/filling_barrel.tscn" id="13_f7610"]
 [ext_resource type="SpriteFrames" uid="uid://c2acr4u754f17" path="res://scenes/quests/story_quests/nature_max/mis_mosaicos/naturemax_recipiente.tres" id="14_xw4qf"]
-[ext_resource type="PackedScene" uid="uid://fuhl3l6gxq5k" path="res://scenes/game_elements/props/collectible_item/collectible_item.tscn" id="15_t8ilv"]
 [ext_resource type="Script" uid="uid://bgmwplmj3bfls" path="res://scenes/globals/game_state/inventory/inventory_item.gd" id="16_nyqor"]
 [ext_resource type="PackedScene" uid="uid://dmevaymmt6wco" path="res://scenes/game_elements/props/powerup/powerup.tscn" id="17_i7gxl"]
+[ext_resource type="PackedScene" uid="uid://c3r8l0xulhahg" path="res://scenes/quests/story_quests/nature_max/components_general/nature_max_collectible_item.tscn" id="17_l4741"]
 [ext_resource type="PackedScene" uid="uid://cfcgrfvtn04yp" path="res://scenes/ui_elements/hud/hud.tscn" id="18_6h4ve"]
 
-[sub_resource type="Resource" id="Resource_sxtpx"]
+[sub_resource type="Resource" id="Resource_t0dmh"]
 script = ExtResource("16_nyqor")
 type = 1
 metadata/_custom_type_script = "uid://bgmwplmj3bfls"
@@ -116,18 +116,15 @@ needed_amount = 5
 label = ""
 color = Color(1, 1, 1, 1)
 
-[node name="CollectibleItem" parent="OnTheGround" unique_id=1864193206 instance=ExtResource("15_t8ilv")]
+[node name="CollectibleItem" parent="OnTheGround" unique_id=327991066 instance=ExtResource("17_l4741")]
 unique_name_in_owner = true
-visible = false
-position = Vector2(868, 303)
 revealed = false
 next_scene = "uid://c1pubeytexvw2"
-item = SubResource("Resource_sxtpx")
+item = SubResource("Resource_t0dmh")
 collected_dialogue = ExtResource("3_t0dmh")
 dialogue_title = &"well_done"
 
 [node name="RepelPowerup" parent="OnTheGround" unique_id=1795462717 instance=ExtResource("17_i7gxl")]
-visible = false
 position = Vector2(114, 488)
 highlight_color = Color(0, 0.4392157, 1, 1)
 
@@ -152,4 +149,3 @@ position = Vector2(403.9375, 320.5)
 shape = SubResource("RectangleShape2D_xw4qf")
 
 [connection signal="cinematic_finished" from="Cinematic" to="FillGameLogic" method="start"]
-[connection signal="goal_reached" from="FillGameLogic" to="OnTheGround/CollectibleItem" method="reveal"]
