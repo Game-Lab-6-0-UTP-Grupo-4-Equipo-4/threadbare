@@ -178,7 +178,7 @@ region = Rect2(768, 0, 192, 192)
 atlas = ExtResource("16_g4ka4")
 region = Rect2(960, 0, 192, 192)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_p2l4a"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_bu71x"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -386,7 +386,7 @@ y_sort_enabled = true
 
 [node name="Player" parent="OnTheGround" unique_id=747348360 instance=ExtResource("5_fje8f")]
 position = Vector2(152, 497)
-sprite_frames = SubResource("SpriteFrames_p2l4a")
+sprite_frames = SubResource("SpriteFrames_bu71x")
 
 [node name="Camera2D" type="Camera2D" parent="OnTheGround/Player" unique_id=1732237457]
 position = Vector2(-15, 0)
@@ -469,6 +469,9 @@ hint_sign = NodePath("../../Signs/HintSign2")
 stream = ExtResource("30_bu71x")
 
 [node name="FailLabel" type="Label" parent="OnTheGround/SequencePuzzle" unique_id=364895351]
+modulate = Color(3.572204e-09, 0.0075917086, 0.007879774, 1)
+texture_filter = 2
+texture_repeat = 1
 offset_left = 415.0
 offset_top = 520.0
 offset_right = 640.0
