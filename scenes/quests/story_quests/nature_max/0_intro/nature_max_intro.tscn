@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dv4f232y8w8dv" path="res://scenes/game_elements/props/decoration/water_rock/water_rock.tscn" id="12_y14wn"]
 [ext_resource type="PackedScene" uid="uid://dttyvh6kyru5y" path="res://scenes/game_elements/props/decoration/butterfly/butterfly.tscn" id="13_x4ueq"]
 [ext_resource type="PackedScene" uid="uid://djmdhrse34vgq" path="res://scenes/game_elements/props/decoration/bunny/bunny.tscn" id="15_x4ueq"]
+[ext_resource type="Texture2D" uid="uid://bjpndleydud2c" path="res://scenes/quests/story_quests/nature_max/mis_mosaicos/naturemax_monstruo_animacion/botellabasura.png" id="16_fyvtn"]
 
 [sub_resource type="Animation" id="Animation_y14wn"]
 length = 0.001
@@ -126,6 +127,11 @@ tile_set = ExtResource("1_2kdrr")
 modulate = Color(1, 1, 1, 0.3372549)
 tile_map_data = PackedByteArray("AAAEAAMAAAAAAAAAAAADAAMAAAAAAAAAAAADAAIAAAAAAAAAAAADAAEAAAAAAAAAAAACAAEAAAAAAAAAAAABAAEAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAIAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAAJAAYAAAAAAAAAAAAJAAUAAAAAAAAAAAAIAAUAAAAAAAAAAAAKAAUAAAAAAAAAAAALAAUAAAAAAAAAAAALAAQAAAAAAAAAAAALAAMAAAAAAAAAAAAMAAMAAAAAAAAAAAANAAIAAAAAAAAAAAANAAQAAAAAAAAAAAANAAMAAAAAAAAAAAANAAUAAAAAAAAAAAANAAYAAAAAAAAAAAAOAAYAAAAAAAAAAAAPAAYAAAAAAAAAAAAPAAUAAAAAAAAAAAAPAAQAAAAAAAAAAAAPAAMAAAAAAAAAAAAPAAIAAAAAAAAAAAAQAAIAAAAAAAAAAAABAAAAAAAAAAAAAAA=")
 tile_set = ExtResource("3_vvfw4")
+
+[node name="Botellabasura" type="Sprite2D" parent="TileMapLayers" unique_id=41787297]
+position = Vector2(245.75, 269.125)
+scale = Vector2(0.13194443, 0.17024527)
+texture = ExtResource("16_fyvtn")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1064875179]
 position = Vector2(153, 366)
@@ -353,3 +359,8 @@ position = Vector2(183, 297)
 
 [node name="Bunny" parent="." unique_id=398073521 instance=ExtResource("15_x4ueq")]
 position = Vector2(296, 427)
+
+[node name="Botellabasura" type="Sprite2D" parent="." unique_id=703465699]
+position = Vector2(983, 551)
+scale = Vector2(0.15555556, 0.18098159)
+texture = ExtResource("16_fyvtn")

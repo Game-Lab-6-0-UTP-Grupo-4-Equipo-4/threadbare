@@ -37,6 +37,7 @@
 [ext_resource type="Script" uid="uid://x1mxt6bmei2o" path="res://scenes/ui_elements/cinematic/cinematic.gd" id="25_kirfk"]
 [ext_resource type="AudioStream" uid="uid://bu477pq2o8h2q" path="res://scenes/quests/story_quests/nature_max/0_intro/error.wav" id="30_bu71x"]
 [ext_resource type="AudioStream" uid="uid://0fkxcueoefhc" path="res://scenes/quests/story_quests/nature_max/0_intro/correcto.mp3" id="31_u7m8i"]
+[ext_resource type="Texture2D" uid="uid://bjpndleydud2c" path="res://scenes/quests/story_quests/nature_max/mis_mosaicos/naturemax_monstruo_animacion/botellabasura.png" id="38_u7m8i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yg72c"]
 atlas = ExtResource("12_bu71x")
@@ -178,7 +179,7 @@ region = Rect2(768, 0, 192, 192)
 atlas = ExtResource("16_g4ka4")
 region = Rect2(960, 0, 192, 192)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_bu71x"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_p2l4a"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -386,7 +387,7 @@ y_sort_enabled = true
 
 [node name="Player" parent="OnTheGround" unique_id=747348360 instance=ExtResource("5_fje8f")]
 position = Vector2(152, 497)
-sprite_frames = SubResource("SpriteFrames_bu71x")
+sprite_frames = SubResource("SpriteFrames_p2l4a")
 
 [node name="Camera2D" type="Camera2D" parent="OnTheGround/Player" unique_id=1732237457]
 position = Vector2(-15, 0)
@@ -469,6 +470,7 @@ hint_sign = NodePath("../../Signs/HintSign2")
 stream = ExtResource("30_bu71x")
 
 [node name="FailLabel" type="Label" parent="OnTheGround/SequencePuzzle" unique_id=364895351]
+visible = false
 modulate = Color(3.572204e-09, 0.0075917086, 0.007879774, 1)
 texture_filter = 2
 texture_repeat = 1
@@ -503,5 +505,10 @@ evitar la contaminación."
 script = ExtResource("25_kirfk")
 dialogue = ExtResource("22_0c7t1")
 metadata/_custom_type_script = "uid://x1mxt6bmei2o"
+
+[node name="Botellabasura" type="Sprite2D" parent="." unique_id=598810805]
+position = Vector2(657, 546)
+scale = Vector2(0.094444506, 0.12730065)
+texture = ExtResource("38_u7m8i")
 
 [connection signal="solved" from="OnTheGround/SequencePuzzle" to="OnTheGround/CollectibleItem" method="reveal"]

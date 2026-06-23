@@ -29,13 +29,34 @@ signal step_solved(step_index: int)
 
 ## If enabled, show messages in the console describing the player's progress (or not) in the puzzle
 @export var debug: bool = false
+## para audio de error
+@onready var error_player: AudioStreamPlayer2D = $ErrorPlayer
+##para el mensaje de error
+@onready var fail_label: Label = $FailLabel
+##Codigo para respueta correcta @gisela
+
+@export var win_sound: AudioStream
+@onready var win_player: AudioStreamPlayer2D = $WinPlayer
+
+@export var step_success_sound: AudioStream
+@onready var step_success_player: AudioStreamPlayer2D = $StepSuccessPlayer
+
 
 var hint_levels: Dictionary = {}
 
-var _objects: Array[SequencePuzzleObject]
+var _objects: Array[SequencePuzzleObject] = []
 
 var _current_step: int = 0
 var _position: int = 0
+
+
+func show_fail_message() -> void:
+	fail_label.visible = true
+	fail_label.text = "Secuencia incorrecta"
+
+	await get_tree().create_timer(1.5).timeout
+
+	fail_label.visible = false
 
 
 func _find_steps(node: Node) -> void:
@@ -106,25 +127,40 @@ func _on_kicked(object: SequencePuzzleObject) -> void:
 		_debug("Matching again at start of sequence...")
 
 	if sequence[_position] != object:
-		_debug("Didn't match")
+		print("ERROR DETECTADO")
+		if error_player:
+			error_player.stop()
+			error_player.seek(0)
+			error_player.play()
+		show_fail_message()
+		_position = 0
 		return
 
 	_position += 1
+
 	if _position != sequence.size():
 		_debug("Played %s, awaiting %s", [sequence.slice(0, _position), sequence.slice(_position)])
 		return
 
 	_debug("Finished sequence")
+	if step_success_player:
+		await get_tree().create_timer(0.7).timeout
+		step_success_player.stop()
+		step_success_player.seek(0)
+		step_success_player.play()
+		
 	step.hint_sign.set_solved()
-
-	# Emit step_solved signal to allow level designers to react to individual step completion
 	step_solved.emit(_current_step)
-	_debug("Step %d solved", [_current_step])
-
+	
 	_update_current_step()
 
 	if _current_step == steps.size():
 		_debug("All sequences played")
+		if win_player:
+			win_player.stop()
+			win_player.seek(0)
+			win_player.play()
+		await get_tree().create_timer(1.2).timeout
 		solved.emit()
 	else:
 		_debug("Next sequence: %s", [steps[_current_step]])
