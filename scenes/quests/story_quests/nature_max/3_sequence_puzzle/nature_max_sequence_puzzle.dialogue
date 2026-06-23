@@ -1,6 +1,7 @@
 # SPDX-FileCopyrightText: The Threadbare Authors
 # SPDX-License-Identifier: MPL-2.0
 ~ start
+
 Después de superar al Monstruo de los Desechos Floresta llega hasta una pequeña isla de totora.
 
 Floresta: Hay algo extraño en el aire...
@@ -8,8 +9,10 @@ Floresta: Hay algo extraño en el aire...
 Floresta: Esta melodía... parece una pista.
 
 Floresta: Si la sigo, encontraré la verdad.
+
 => END
 ~ well_done
+
 VOZ MISTERIOSA: Has descifrado la señal...
 
 VOZ MISTERIOSA: El origen de la contaminación aún está oculto...
