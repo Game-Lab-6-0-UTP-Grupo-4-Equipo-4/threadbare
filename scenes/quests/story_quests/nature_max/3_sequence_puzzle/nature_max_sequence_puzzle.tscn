@@ -34,9 +34,9 @@
 [ext_resource type="Resource" uid="uid://db36drjw07lew" path="res://scenes/quests/story_quests/nature_max/3_sequence_puzzle/nature_max_sequence_puzzle.dialogue" id="22_0c7t1"]
 [ext_resource type="PackedScene" uid="uid://covsdqqsd6rsy" path="res://scenes/game_elements/props/sign/sign.tscn" id="23_g0d7d"]
 [ext_resource type="PackedScene" uid="uid://cfcgrfvtn04yp" path="res://scenes/ui_elements/hud/hud.tscn" id="24_nbigw"]
-[ext_resource type="AudioStream" uid="uid://shrjuj7sm6bm" path="res://scenes/quests/story_quests/shjourney/2_shjourney_intro/template_intro_components/EffectSounds/error.wav" id="25_ha83f"]
 [ext_resource type="Script" uid="uid://x1mxt6bmei2o" path="res://scenes/ui_elements/cinematic/cinematic.gd" id="25_kirfk"]
-[ext_resource type="AudioStream" uid="uid://b3kqbkvomg2xw" path="res://scenes/quests/story_quests/shjourney/2_shjourney_intro/template_intro_components/EffectSounds/correcto.wav" id="26_lyy2g"]
+[ext_resource type="AudioStream" uid="uid://bu477pq2o8h2q" path="res://scenes/quests/story_quests/nature_max/0_intro/error.wav" id="30_bu71x"]
+[ext_resource type="AudioStream" uid="uid://0fkxcueoefhc" path="res://scenes/quests/story_quests/nature_max/0_intro/correcto.mp3" id="31_u7m8i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yg72c"]
 atlas = ExtResource("12_bu71x")
@@ -178,7 +178,7 @@ region = Rect2(768, 0, 192, 192)
 atlas = ExtResource("16_g4ka4")
 region = Rect2(960, 0, 192, 192)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_bu71x"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_p2l4a"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -386,7 +386,7 @@ y_sort_enabled = true
 
 [node name="Player" parent="OnTheGround" unique_id=747348360 instance=ExtResource("5_fje8f")]
 position = Vector2(152, 497)
-sprite_frames = SubResource("SpriteFrames_bu71x")
+sprite_frames = SubResource("SpriteFrames_p2l4a")
 
 [node name="Camera2D" type="Camera2D" parent="OnTheGround/Player" unique_id=1732237457]
 position = Vector2(-15, 0)
@@ -466,10 +466,9 @@ sequence = [NodePath("../../Objects/Blue"), NodePath("../../Objects/Green"), Nod
 hint_sign = NodePath("../../Signs/HintSign2")
 
 [node name="ErrorPlayer" type="AudioStreamPlayer2D" parent="OnTheGround/SequencePuzzle" unique_id=1289130728]
-stream = ExtResource("25_ha83f")
+stream = ExtResource("30_bu71x")
 
 [node name="FailLabel" type="Label" parent="OnTheGround/SequencePuzzle" unique_id=364895351]
-visible = false
 offset_left = 415.0
 offset_top = 520.0
 offset_right = 640.0
@@ -477,15 +476,15 @@ offset_bottom = 547.0
 text = "¡Secuencia incorrecta!"
 
 [node name="StepSuccessPlayer" type="AudioStreamPlayer2D" parent="OnTheGround/SequencePuzzle" unique_id=1506256406]
-stream = ExtResource("26_lyy2g")
+stream = ExtResource("31_u7m8i")
 
 [node name="CollectibleItem" parent="OnTheGround" unique_id=1678374994 instance=ExtResource("20_bxd1d")]
 position = Vector2(861, 282)
 revealed = false
+next_scene = "uid://cedwlc4s1w2rd"
 item = SubResource("Resource_3j2sm")
 collected_dialogue = ExtResource("22_0c7t1")
 dialogue_title = &"well_done"
-next_scene = "uid://cedwlc4s1w2rd"
 
 [node name="Sign" parent="OnTheGround" unique_id=263994380 instance=ExtResource("23_g0d7d")]
 position = Vector2(160, 434)
