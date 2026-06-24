@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bvk7ngwab4lgc"]
 
-[ext_resource type="Script" uid="uid://bofv3bcwj3rx2" path="res://scenes/game_elements/props/projectile/components/projectile.gd" id="1_hcyc6"]
+[ext_resource type="Script" uid="uid://bofv3bcwj3rx2" path="res://scenes/quests/story_quests/nature_max/2_combat/combat_components/projectile.gd" id="1_hcyc6"]
 [ext_resource type="SpriteFrames" uid="uid://vpduogia2wr0" path="res://scenes/quests/story_quests/stella/2_stella_combat/stella_combat_components/stella_projectile2_spriteframes.tres" id="2_hcyc6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tbgi4"]

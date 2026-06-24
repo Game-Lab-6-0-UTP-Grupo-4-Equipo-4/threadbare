@@ -1,80 +1,48 @@
 # SPDX-FileCopyrightText: The Threadbare Authors
 # SPDX-License-Identifier: MPL-2.0
-class_name Projectile
+class_name NatureMaxProjectile
 extends RigidBody2D
-## A projectile that can fill matching [FillingBarrel]s.
-##
-## @tutorial: https://github.com/endlessm/threadbare/discussions/1323
-##
-## This is a piece of the fill-matching mechanic.
-## [br][br]
-## The projectile has a [member label] and optionally a [member color]
-## to tint it. These are assigned by the [ThrowingEnemy] when it fires a projectile.
-## When the projectile collides with a [FillingBarrel] and both labels match,
-## it calls [member FillingBarrel.increment()] and is removed.
-## [br][br]
-## The projectile will live in the scene until [member duration_timer] times up.
-## When the projectile collides with anything, this timer is resetted, so the
-## projectile life is expanded.
 
-## The projectile can fill barrels with the matching label.
 @export var label: String = "???"
 
-## Optional color. Use it together with the label to make a color-matching game.
 @export var color: Color:
 	set = _set_color
 
-## Whether this projectile hits the player.
 @export var can_hit_player: bool = true:
 	set = _set_can_hit_player
 
-## Whether this projectile hits the enemies.
 @export var can_hit_enemy: bool = false:
 	set = _set_can_hit_enemy
 
 @export_group("Movement")
 
-## The speed of the initial impulse and the bouncing impulse.
 @export_range(10., 100., 5., "or_greater", "or_less", "suffix:m/s") var speed: float = 30.0
 
-## The speed after the projectile gets hit.
 @export_range(10., 100., 5., "or_greater", "or_less", "suffix:m/s") var hit_speed: float = 100.0
 
-## The initial direction.
 @export var direction: Vector2 = Vector2(0, -1):
 	set = _set_direction
 
-## The life span of the projectile.
 @export_range(0., 10., 0.1, "or_greater", "suffix:s") var duration: float = 5.0
 
-## If set, the projectile will constantly adjust itself to target this node. It will still start
-## moving in the initial [member direction].
 @export var node_to_follow: Node2D = null
 
 @export_group("FXs")
 
-## A small visual effect used when the projectile collides with things.
 @export var small_fx_scene: PackedScene
-
-## A big visual effect used when the projectile explodes.
 @export var big_fx_scene: PackedScene
-
-## A scene with a trail particles visual effect. It should contain a [class GPUParticles2D] as
-## root node. When the projectile gets hit, the [member GPUParticles2D.amount_ratio] is set to 1.
 @export var trail_fx_scene: PackedScene
 
 var _trail_particles: GPUParticles2D
 
+# --- ESTADO DE PURIFICACIÓN ---
+var is_contaminated: bool = true
+# ------------------------------
+
 @onready var visible_things: Node2D = %VisibleThings
 @onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
 @onready var trail_fx_marker: Marker2D = %TrailFXMarker
-
-## How long the projectile lives in the scene.
-## [br][br]
-## This timer is restarted each time the projectile collides with anything.
-## So the life of the projectile is extended in each collision.
 @onready var duration_timer: Timer = %DurationTimer
-
 @onready var hit_sound: AudioStreamPlayer2D = %HitSound
 
 
@@ -101,11 +69,22 @@ func _set_can_hit_enemy(new_can_hit_enemy: bool) -> void:
 
 
 func _ready() -> void:
+	contact_monitor = true
+	max_contacts_reported = 5
+	if not body_entered.is_connected(_on_body_entered):
+		body_entered.connect(_on_body_entered)
+
 	if trail_fx_scene:
 		_trail_particles = trail_fx_scene.instantiate()
 		trail_fx_marker.add_child(_trail_particles)
 
 	_set_color(color)
+	
+	if is_contaminated:
+		animated_sprite_2d.modulate = Color(0.4, 0.9, 0.4, 0.8)
+
+	set_collision_layer_value(11, true)
+	set_collision_layer_value(12, false)
 
 	duration_timer.wait_time = duration
 	duration_timer.start()
@@ -115,15 +94,14 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	visible_things.rotation = linear_velocity.angle()
-	if node_to_follow:
-		var direction_to_target: Vector2 = global_position.direction_to(
-			node_to_follow.global_position
-		)
-		var force: Vector2 = direction_to_target * speed
-		constant_force = force
+	
+	if node_to_follow and is_instance_valid(node_to_follow):
+		var direction_to_target: Vector2 = global_position.direction_to(node_to_follow.global_position)
+		constant_force = direction_to_target * speed
+	else:
+		constant_force = Vector2.ZERO
 
 
-## Add a small effect scene to the current scene in the current position.
 func add_small_fx() -> void:
 	if not small_fx_scene:
 		return
@@ -138,26 +116,51 @@ func _on_body_entered(body: Node2D) -> void:
 	add_small_fx()
 	duration_timer.start()
 
-	# Logic for Fragile Barrel
-	# We must check for the specific subclass first because it inherits from FillingBarrel
+	if body.has_method("defeat"):
+		if is_contaminated:
+			body.defeat()
+			explode()
+		return
+	elif body.owner and body.owner.has_method("defeat"):
+		if is_contaminated:
+			body.owner.defeat()
+			explode()
+		return
+
 	if body.owner is FragileBarrel:
 		body.owner.hit_by_droplet(label)
 		queue_free()
 		return
 
-	# Standard Logic for FillingBarrel
 	if body.owner is FillingBarrel:
+		if is_contaminated:
+			explode()
+			return
+			
 		var filling_barrel: FillingBarrel = body.owner as FillingBarrel
 		if filling_barrel.label == label:
 			filling_barrel.increment()
+			
+			# --- AVISO AL JEFE DE BOTELLA RECICLADA ---
+			get_tree().call_group("throwing_enemy", "bottle_recycled")
+			
 			queue_free()
 
 
-## Called from the Repel component when this body
-## enters the repel area.
 func got_repelled(repel_direction: Vector2) -> void:
+	if is_contaminated:
+		purify_projectile()
+		
 	add_small_fx()
 	duration_timer.start()
+
+	var barrels = get_tree().get_nodes_in_group("filling_barrels")
+	for barrel in barrels:
+		if not barrel.is_locked:
+			node_to_follow = barrel
+			speed = hit_speed
+			break
+
 	var hit_vector: Vector2 = repel_direction * hit_speed
 	hit_sound.play()
 	animated_sprite_2d.speed_scale = 2
@@ -165,6 +168,19 @@ func got_repelled(repel_direction: Vector2) -> void:
 		_trail_particles.amount_ratio = 1.
 	linear_velocity = Vector2.ZERO
 	apply_impulse(hit_vector)
+
+
+func purify_projectile() -> void:
+	is_contaminated = false
+	print("✨ ¡Botella purificada por Floresta!")
+	
+	var tween = create_tween()
+	tween.tween_property(animated_sprite_2d, "modulate", Color.WHITE, 0.2)
+	
+	set_collision_layer_value(11, false)
+	set_collision_layer_value(12, true)
+	
+	set_collision_mask_value(14, true)
 
 
 func explode() -> void:
@@ -181,8 +197,14 @@ func _on_duration_timer_timeout() -> void:
 	explode()
 
 
-## Remove the ball from the scene after the goal is reached.
-## Wait a short random time and then explode.
 func remove() -> void:
 	await get_tree().create_timer(randf_range(0., 3.)).timeout
 	explode()
+
+
+func _on_damage_area_area_entered(area: Area2D) -> void:
+	if area.owner and area.owner.has_method("defeat"):
+		if is_contaminated:
+			print("¡Impacto físico nativo contra Floresta!")
+			area.owner.defeat()
+			explode()

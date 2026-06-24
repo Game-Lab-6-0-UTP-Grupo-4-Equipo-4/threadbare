@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://driu5llb873ns"]
 
-[ext_resource type="Script" uid="uid://bofv3bcwj3rx2" path="res://scenes/game_elements/props/projectile/components/projectile.gd" id="1_vo5mr"]
+[ext_resource type="Script" uid="uid://bofv3bcwj3rx2" path="res://scenes/quests/story_quests/nature_max/2_combat/combat_components/projectile.gd" id="1_vo5mr"]
 [ext_resource type="SpriteFrames" uid="uid://iyjta1h3tu4a" path="res://scenes/quests/story_quests/champ/1_combat/combat_components/champ_bait_projectile_3.tres" id="2_k63yj"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tbgi4"]
