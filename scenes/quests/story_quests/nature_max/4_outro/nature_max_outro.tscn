@@ -75,7 +75,7 @@ position = Vector2(347, 298)
 
 [node name="Butterfly3" parent="TileMapLayers" unique_id=488734917 instance=ExtResource("8_j55ak")]
 modulate = Color(0.6513344, 0.95540136, 0.88130885, 1)
-position = Vector2(617, 218)
+position = Vector2(606, 232)
 
 [node name="Butterfly4" parent="TileMapLayers" unique_id=565312648 instance=ExtResource("8_j55ak")]
 modulate = Color(0.6513344, 0.95540136, 0.88130885, 1)
