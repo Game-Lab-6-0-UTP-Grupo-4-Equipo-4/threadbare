@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: The Threadbare Authors
 # SPDX-License-Identifier: MPL-2.0
-class_name Projectile
+class_name NatureMaxProjectile
 extends RigidBody2D
 
 @export var label: String = "???"
