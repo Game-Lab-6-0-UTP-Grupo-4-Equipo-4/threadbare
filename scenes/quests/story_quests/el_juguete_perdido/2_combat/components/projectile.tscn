@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://nve5vecg5q5q"]
 
-[ext_resource type="Script" uid="uid://bofv3bcwj3rx2" path="res://scenes/game_elements/props/projectile/components/projectile.gd" id="1_1iwk7"]
+[ext_resource type="Script" uid="uid://bofv3bcwj3rx2" path="res://scenes/quests/story_quests/nature_max/2_combat/combat_components/projectile.gd" id="1_1iwk7"]
 [ext_resource type="SpriteFrames" uid="uid://qtq61h7mprbc" path="res://scenes/quests/story_quests/el_juguete_perdido/2_combat/components/projectile_spriteframes.tres" id="2_1iwk7"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tbgi4"]

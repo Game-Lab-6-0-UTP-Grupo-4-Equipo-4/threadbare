@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://xbgo0b3f50mw"]
 
-[ext_resource type="Script" uid="uid://bofv3bcwj3rx2" path="res://scenes/game_elements/props/projectile/components/projectile.gd" id="1_6uc4b"]
+[ext_resource type="Script" uid="uid://bofv3bcwj3rx2" path="res://scenes/quests/story_quests/nature_max/2_combat/combat_components/projectile.gd" id="1_6uc4b"]
 [ext_resource type="PackedScene" uid="uid://clgisducnnh0a" path="res://scenes/game_elements/fx/liquid_small_splat/liquid_small_splat.tscn" id="2_3cevt"]
 [ext_resource type="PackedScene" uid="uid://b4qu6wml5gd7a" path="res://scenes/game_elements/fx/liquid_big_splat/liquid_big_splat.tscn" id="3_vc4n7"]
 [ext_resource type="PackedScene" uid="uid://bgce3qns72g3m" path="res://scenes/game_elements/fx/liquid_trail.tscn" id="4_kxf4x"]

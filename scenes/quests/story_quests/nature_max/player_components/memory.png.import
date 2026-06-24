@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8omaj2esteen"
-path="res://.godot/imported/world_memory.png-d9143b02121463bf5876f9135cf15bcd.ctex"
+uid="uid://brspc1u02oawt"
+path="res://.godot/imported/memory.png-c0f56c2c0e10408b59e2145135542298.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/first_party/collectibles/world_memory.png"
-dest_files=["res://.godot/imported/world_memory.png-d9143b02121463bf5876f9135cf15bcd.ctex"]
+source_file="res://scenes/quests/story_quests/nature_max/player_components/memory.png"
+dest_files=["res://.godot/imported/memory.png-c0f56c2c0e10408b59e2145135542298.ctex"]
 
 [params]
 

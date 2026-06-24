@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://pk3ucq7e2eah" path="res://scenes/game_logic/player_mode.gd" id="1_xw4qf"]
 [ext_resource type="Script" uid="uid://x1mxt6bmei2o" path="res://scenes/ui_elements/cinematic/cinematic.gd" id="2_l4741"]
 [ext_resource type="Resource" uid="uid://cwwg2fb3m527q" path="res://scenes/quests/story_quests/nature_max/2_combat/combat_components/nature_max_combat.dialogue" id="3_t0dmh"]
-[ext_resource type="Script" uid="uid://cp54mgi54nywo" path="res://scenes/game_logic/fill_game_logic.gd" id="4_25me7"]
+[ext_resource type="Script" uid="uid://cp54mgi54nywo" path="res://scenes/quests/story_quests/nature_max/2_combat/combat_components/fill_game_logic.gd" id="4_25me7"]
 [ext_resource type="TileSet" uid="uid://nlb0o2iaogfd" path="res://scenes/quests/story_quests/nature_max/tiles/nature_max_exterior_floors.tres" id="5_1vwlu"]
 [ext_resource type="TileSet" uid="uid://cqko15qxc35nq" path="res://scenes/quests/story_quests/nature_max/tiles/nature_max_shadows.tres" id="6_axv4w"]
 [ext_resource type="TileSet" uid="uid://bt8suqn65s73i" path="res://scenes/quests/story_quests/nature_max/tiles/nature_max_elevation_2.tres" id="7_chi64"]
