@@ -4,13 +4,9 @@
 [ext_resource type="TileSet" uid="uid://ccklm5p1f83u" path="res://scenes/quests/story_quests/nature_max/tiles/nature_max_water.tres" id="2_72tgt"]
 [ext_resource type="TileSet" uid="uid://b1eneexy3s27t" path="res://scenes/quests/story_quests/nature_max/tiles/nature_max_foam_2.tres" id="3_b2oaj"]
 [ext_resource type="TileSet" uid="uid://nlb0o2iaogfd" path="res://scenes/quests/story_quests/nature_max/tiles/nature_max_exterior_floors.tres" id="4_ic8f2"]
-[ext_resource type="PackedScene" uid="uid://dttyvh6kyru5y" path="res://scenes/game_elements/props/decoration/butterfly/butterfly.tscn" id="5_6yi8w"]
 [ext_resource type="PackedScene" uid="uid://iu2q66clupc6" path="res://scenes/game_elements/characters/player/player.tscn" id="5_fje8f"]
 [ext_resource type="SpriteFrames" uid="uid://bdvu20sxgtt0o" path="res://scenes/quests/story_quests/nature_max/player_components/nature_max_player.tres" id="6_6yi8w"]
-[ext_resource type="PackedScene" uid="uid://b7h2j0j6jmigc" path="res://scenes/game_elements/props/tree/tree_void_affected.tscn" id="6_ha83f"]
 [ext_resource type="Script" uid="uid://c68oh8dtr21ti" path="res://scenes/game_logic/sequence_puzzle.gd" id="7_ha83f"]
-[ext_resource type="PackedScene" uid="uid://7873qa54birk" path="res://scenes/game_elements/props/tree/tree.tscn" id="7_lyy2g"]
-[ext_resource type="PackedScene" uid="uid://djmdhrse34vgq" path="res://scenes/game_elements/props/decoration/bunny/bunny.tscn" id="8_bfqvm"]
 [ext_resource type="PackedScene" uid="uid://b8sok264erfoc" path="res://scenes/game_elements/props/sequence_puzzle_object/sequence_puzzle_object.tscn" id="8_lyy2g"]
 [ext_resource type="SpriteFrames" uid="uid://cmg8ej1j2ashn" path="res://scenes/quests/story_quests/nature_max/3_sequence_puzzle/nature_max_object.tres" id="9_bfqvm"]
 [ext_resource type="AudioStream" uid="uid://cg57q82pb243w" path="res://assets/third_party/nepalese_hand_bells/handBells-c4.ogg" id="10_akdxt"]
@@ -49,62 +45,21 @@ tile_map_data = PackedByteArray("AAACAAEAAgAAAAAAAAADAAEAAgAAAAAAAAAEAAEAAgAAAAA
 tile_set = ExtResource("3_b2oaj")
 
 [node name="Grass" type="TileMapLayer" parent="TileMapLayers" unique_id=592819758]
-tile_map_data = PackedByteArray("AAANAAcAAQACAAIAAAANAAYAAQACAAEAAAANAAUAAQACAAEAAAANAAQAAQACAAEAAAANAAMAAQACAAEAAAANAAIAAQACAAAAAAAMAAcAAQABAAEAAAAMAAYAAQABAAEAAAAMAAUAAQABAAEAAAAMAAQAAQABAAEAAAAMAAMAAQABAAEAAAAMAAIAAQABAAEAAAAMAAEAAQACAAAAAAALAAcAAQABAAEAAAALAAYAAQABAAEAAAALAAUAAQABAAEAAAALAAQAAQABAAEAAAALAAMAAQABAAEAAAALAAIAAQABAAEAAAALAAEAAQABAAAAAAAKAAcAAQABAAEAAAAKAAYAAQABAAEAAAAKAAUAAQABAAEAAAAKAAQAAQABAAEAAAAKAAMAAQABAAEAAAAKAAIAAQABAAEAAAAJAAcAAQABAAEAAAAJAAYAAQABAAEAAAAJAAUAAQABAAEAAAAJAAQAAQABAAEAAAAJAAMAAQABAAEAAAAJAAIAAQABAAEAAAAIAAcAAQABAAEAAAAIAAYAAQABAAEAAAAIAAUAAQABAAEAAAAIAAQAAQABAAEAAAAIAAMAAQABAAEAAAAIAAIAAQABAAEAAAAHAAcAAQABAAEAAAAHAAYAAQABAAEAAAAHAAUAAQABAAEAAAAHAAQAAQABAAEAAAAHAAMAAQABAAEAAAAHAAIAAQABAAEAAAAGAAcAAQABAAEAAAAGAAYAAQABAAEAAAAGAAUAAQABAAEAAAAGAAQAAQABAAEAAAAGAAMAAQABAAEAAAAGAAIAAQABAAEAAAAFAAcAAQABAAEAAAAFAAYAAQABAAEAAAAFAAUAAQABAAEAAAAFAAQAAQABAAEAAAAFAAMAAQABAAEAAAAFAAIAAQABAAEAAAAFAAEAAQABAAAAAAAEAAcAAQABAAEAAAAEAAYAAQABAAEAAAAEAAQAAQABAAEAAAAEAAMAAQABAAEAAAAEAAIAAQABAAEAAAAEAAEAAQABAAAAAAADAAQAAQABAAEAAAADAAMAAQABAAEAAAADAAIAAQABAAEAAAADAAEAAQABAAAAAAACAAMAAQABAAEAAAACAAIAAQABAAEAAAACAAEAAQAAAAAAAAABAAMAAQAAAAEAAAABAAIAAQAAAAAAAAACAAQAAQABAAEAAAABAAQAAQAAAAEAAAACAAgAAQAAAAIAAAADAAgAAQABAAIAAAAEAAgAAQABAAIAAAAFAAgAAQABAAIAAAAGAAgAAQABAAIAAAAHAAgAAQABAAIAAAAIAAgAAQABAAIAAAAJAAgAAQABAAIAAAAKAAgAAQABAAIAAAAMAAgAAQACAAIAAAALAAgAAQABAAIAAAABAAUAAQAAAAEAAAACAAUAAQABAAEAAAADAAUAAQABAAEAAAAEAAUAAQABAAEAAAADAAYAAQABAAEAAAABAAYAAQAAAAEAAAABAAcAAQAAAAIAAAACAAcAAQABAAEAAAADAAcAAQABAAEAAAAGAAEAAQABAAAAAAAHAAEAAQABAAAAAAAIAAEAAQABAAAAAAAJAAEAAQABAAAAAAAKAAEAAQABAAAAAAACAAYAAQABAAEAAAA=")
+tile_map_data = PackedByteArray("AAANAAcAAQACAAIAAAANAAYAAQACAAEAAAANAAUAAQACAAEAAAANAAQAAQACAAEAAAANAAMAAQACAAEAAAANAAIAAQACAAAAAAAMAAcAAQABAAEAAAAMAAYAAQABAAEAAAAMAAUAAQABAAEAAAAMAAQAAQABAAEAAAAMAAMAAQABAAEAAAAMAAIAAQABAAEAAAAMAAEAAQACAAAAAAALAAcAAQABAAEAAAALAAYAAQABAAEAAAALAAUAAQABAAEAAAALAAQAAQABAAEAAAALAAMAAQABAAEAAAALAAIAAQABAAEAAAALAAEAAQABAAAAAAAKAAcAAQABAAEAAAAKAAYAAQABAAEAAAAKAAUAAQABAAEAAAAKAAQAAQABAAEAAAAKAAMAAQABAAEAAAAKAAIAAQABAAEAAAAJAAcAAQABAAEAAAAJAAYAAQABAAEAAAAJAAUAAQABAAEAAAAJAAQAAQABAAEAAAAJAAMAAQABAAEAAAAJAAIAAQABAAEAAAAIAAcAAQABAAEAAAAIAAYAAQABAAEAAAAIAAUAAQABAAEAAAAIAAQAAQABAAEAAAAIAAMAAQABAAEAAAAIAAIAAQABAAEAAAAHAAcAAQABAAEAAAAHAAYAAQABAAEAAAAHAAUAAQABAAEAAAAHAAQAAQABAAEAAAAHAAMAAQABAAEAAAAHAAIAAQABAAEAAAAGAAcAAQABAAEAAAAGAAYAAQABAAEAAAAGAAUAAQABAAEAAAAGAAQAAQABAAEAAAAGAAMAAQABAAEAAAAGAAIAAQABAAEAAAAFAAcAAQABAAEAAAAFAAYAAQABAAEAAAAFAAUAAQABAAEAAAAFAAQAAQABAAEAAAAFAAMAAQABAAEAAAAFAAIAAQABAAEAAAAFAAEAAQABAAAAAAAEAAcAAQABAAEAAAAEAAYAAQABAAEAAAAEAAQAAQABAAEAAAAEAAMAAQABAAEAAAAEAAIAAQABAAEAAAAEAAEAAQABAAAAAAADAAQAAQABAAEAAAADAAMAAQABAAEAAAADAAIAAQABAAEAAAADAAEAAQABAAAAAAACAAMAAQABAAEAAAACAAIAAQABAAEAAAACAAEAAQAAAAAAAAABAAMAAQAAAAEAAAABAAIAAQAAAAAAAAACAAQAAQABAAEAAAABAAQAAQAAAAEAAAACAAgAAQAAAAIAAAADAAgAAQABAAIAAAAEAAgAAQABAAIAAAAFAAgAAQABAAIAAAAGAAgAAQABAAIAAAAHAAgAAQABAAIAAAAIAAgAAQABAAIAAAAJAAgAAQABAAIAAAAKAAgAAQABAAIAAAAMAAgAAQACAAIAAAALAAgAAQABAAIAAAABAAUAAQAAAAEAAAACAAUAAQABAAEAAAADAAUAAQABAAEAAAAEAAUAAQABAAEAAAADAAYAAQABAAEAAAACAAYAAQABAAEAAAABAAYAAQAAAAEAAAABAAcAAQAAAAIAAAACAAcAAQABAAEAAAADAAcAAQABAAEAAAAGAAEAAQABAAAAAAAHAAEAAQABAAAAAAAIAAEAAQABAAAAAAAJAAEAAQABAAAAAAAKAAEAAQABAAAAAAA=")
 tile_set = ExtResource("4_ic8f2")
 
 [node name="Sand" type="TileMapLayer" parent="TileMapLayers" unique_id=2049231096]
-tile_map_data = PackedByteArray("AAACAAcAAQAFAAMAAAADAAcAAQAHAAIAAAADAAYAAQAIAAEAAAADAAUAAQAFAAAAAAAEAAUAAQAGAAMAAAAFAAUAAQAGAAMAAAAGAAUAAQAGAAMAAAAHAAUAAQAGAAIAAAAIAAUAAQAGAAMAAAAJAAUAAQAGAAIAAAAKAAUAAQAGAAMAAAALAAUAAQAHAAIAAAALAAQAAQAFAAAAAAAMAAQAAQAGAAMAAAANAAQAAQAHAAMAAAAHAAMAAQAIAAAAAAAHAAQAAQAIAAEAAAAJAAMAAQAIAAAAAAAJAAQAAQAIAAEAAAA=")
+tile_map_data = PackedByteArray("AAACAAcAAQAFAAMAAAADAAcAAQAHAAIAAAADAAYAAQAIAAEAAAADAAUAAQAFAAAAAAAEAAUAAQAGAAMAAAAFAAUAAQAGAAMAAAAGAAUAAQAGAAMAAAAHAAUAAQAGAAMAAAAIAAUAAQAGAAMAAAAJAAUAAQAGAAMAAAAKAAUAAQAGAAMAAAALAAUAAQAHAAIAAAALAAQAAQAFAAAAAAAMAAQAAQAGAAMAAAANAAQAAQAHAAMAAAA=")
 tile_set = ExtResource("4_ic8f2")
-
-[node name="Butterfly" parent="TileMapLayers" unique_id=488734917 instance=ExtResource("5_6yi8w")]
-position = Vector2(201, 297)
-
-[node name="Butterfly2" parent="TileMapLayers" unique_id=1275065248 instance=ExtResource("5_6yi8w")]
-position = Vector2(744, 539)
-
-[node name="TreeVoidAffected" parent="TileMapLayers" unique_id=1182216860 instance=ExtResource("6_ha83f")]
-position = Vector2(130, 279)
-scale = Vector2(0.88532937, 0.86980987)
-
-[node name="Tree" parent="TileMapLayers" unique_id=1721425671 instance=ExtResource("7_lyy2g")]
-position = Vector2(757, 225)
-scale = Vector2(0.94410306, 0.93309075)
-
-[node name="Tree2" parent="TileMapLayers" unique_id=946226065 instance=ExtResource("7_lyy2g")]
-position = Vector2(265.99997, 177)
-scale = Vector2(0.94410306, 0.93309075)
-
-[node name="Tree2" parent="TileMapLayers/Tree2" unique_id=1080226847 instance=ExtResource("7_lyy2g")]
-position = Vector2(119.69035, 117.88779)
-scale = Vector2(0.94410306, 0.93309075)
-
-[node name="Tree3" parent="TileMapLayers" unique_id=2017201839 instance=ExtResource("7_lyy2g")]
-position = Vector2(861, 486)
-scale = Vector2(0.94410306, 0.93309075)
-
-[node name="Bunny" parent="TileMapLayers" unique_id=398073521 instance=ExtResource("8_bfqvm")]
-position = Vector2(673, 299)
 
 [node name="OnTheGround" type="Node2D" parent="." unique_id=1358184019]
 y_sort_enabled = true
 
 [node name="Player" parent="OnTheGround" unique_id=747348360 instance=ExtResource("5_fje8f")]
-position = Vector2(153, 496)
+position = Vector2(383, 371)
 sprite_frames = ExtResource("6_6yi8w")
 
 [node name="Camera2D" type="Camera2D" parent="OnTheGround/Player" unique_id=1732237457]
-limit_left = -56
-limit_top = -56
-limit_right = 1032
-limit_bottom = 712
-position_smoothing_enabled = true
-editor_draw_limits = true
-
-[node name="Player" parent="OnTheGround/Player" unique_id=296354958 instance=ExtResource("5_fje8f")]
-position = Vector2(153, 496)
-sprite_frames = ExtResource("6_6yi8w")
-
-[node name="Camera2D" type="Camera2D" parent="OnTheGround/Player/Player" unique_id=433266564]
 limit_left = -64
 limit_top = -64
 limit_right = 1024
@@ -161,11 +116,11 @@ audio_stream = ExtResource("15_p2l4a")
 y_sort_enabled = true
 
 [node name="HintSign1" parent="OnTheGround/SequencePuzzle/Signs" unique_id=948532428 instance=ExtResource("16_ayddh")]
-position = Vector2(482, 206)
+position = Vector2(506, 210)
 sprite_frames = ExtResource("17_g4ka4")
 
 [node name="HintSign2" parent="OnTheGround/SequencePuzzle/Signs" unique_id=2039036310 instance=ExtResource("16_ayddh")]
-position = Vector2(609, 201)
+position = Vector2(593, 200)
 sprite_frames = ExtResource("18_jgcb8")
 
 [node name="Steps" type="Node2D" parent="OnTheGround/SequencePuzzle" unique_id=666035394]
@@ -183,16 +138,15 @@ hint_sign = NodePath("../../Signs/HintSign2")
 [node name="CollectibleItem" parent="OnTheGround" unique_id=1678374994 instance=ExtResource("20_bxd1d")]
 position = Vector2(861, 282)
 revealed = false
+next_scene = "uid://cedwlc4s1w2rd"
 item = SubResource("Resource_3j2sm")
 collected_dialogue = ExtResource("22_0c7t1")
 dialogue_title = &"well_done"
-next_scene = "uid://cedwlc4s1w2rd"
 
 [node name="Sign" parent="OnTheGround" unique_id=263994380 instance=ExtResource("23_g0d7d")]
-position = Vector2(148, 435)
+position = Vector2(184, 434)
 direction = 1
-text = "Memoriza el patrón para 
-evitar la contaminación."
+text = "First melody: yellow, green, blue."
 
 [node name="ScreenOverlay" type="CanvasLayer" parent="." unique_id=1686505878]
 
