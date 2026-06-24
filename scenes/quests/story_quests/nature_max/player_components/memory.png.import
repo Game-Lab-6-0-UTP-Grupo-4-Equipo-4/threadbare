@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://brspc1u02oawt"
-path="res://.godot/imported/memory.png-9369147c2a738d3b0fbffc211a03d2b7.ctex"
+path="res://.godot/imported/memory.png-c0f56c2c0e10408b59e2145135542298.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/first_party/collectibles/memory.png"
-dest_files=["res://.godot/imported/memory.png-9369147c2a738d3b0fbffc211a03d2b7.ctex"]
+source_file="res://scenes/quests/story_quests/nature_max/player_components/memory.png"
+dest_files=["res://.godot/imported/memory.png-c0f56c2c0e10408b59e2145135542298.ctex"]
 
 [params]
 
